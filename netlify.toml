@@ -1,0 +1,15 @@
+[build]
+  command = "npm run build"
+  publish = "dist/spa"
+
+# Note: This is a frontend-only build
+# API requests should be proxied to your FastAPI backend
+# Configure VITE_API_BASE_URL environment variable in Netlify dashboard
+# to point to your backend API URL
+
+[[redirects]]
+  # Redirect API calls to external backend (configure via VITE_API_BASE_URL)
+  # For SPA routing - redirect all non-file requests to index.html
+  from = "/*"
+  to = "/index.html"
+  status = 200

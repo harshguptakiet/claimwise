@@ -1,0 +1,231 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * ClaimWise Dark Neon AI SaaS Theme
+   * Unified color system for all pages
+   */
+  :root {
+    /* Primary Colors */
+    --primary: 271 81% 56%; /* #A855F7 purple glow */
+    --primary-foreground: 0 0% 100%;
+    
+    --accent: 330 81% 60%; /* #EC4899 pink */
+    --accent-foreground: 0 0% 100%;
+    
+    --secondary: 187 85% 53%; /* #22D3EE cyan */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Background Colors */
+    --background: 220 27% 4%; /* #070A10 */
+    --surface: 260 40% 10%; /* #0E0C1A */
+    --surface-elevated: 260 40% 15%; /* #151028 */
+
+    /* Text Colors */
+    --foreground: 220 14% 91%; /* #E5E7EB text-light */
+    --muted-foreground: 220 13% 63%; /* #9CA3AF text-muted */
+
+    /* UI Colors */
+    --card: 260 40% 10%;
+    --card-foreground: 220 14% 91%;
+    --popover: 260 40% 10%;
+    --popover-foreground: 220 14% 91%;
+    --muted: 220 27% 15%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 260 40% 20%;
+    --input: 260 40% 20%;
+    --ring: 271 81% 56%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 260 40% 8%;
+    --sidebar-foreground: 220 14% 91%;
+    --sidebar-primary: 271 81% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 187 85% 53%;
+    --sidebar-accent-foreground: 220 27% 4%;
+    --sidebar-border: 260 40% 20%;
+    --sidebar-ring: 271 81% 56%;
+  }
+
+  .dark {
+    /* Same as root for consistency */
+    --background: 220 27% 4%;
+    --foreground: 220 14% 91%;
+    --card: 260 40% 10%;
+    --card-foreground: 220 14% 91%;
+    --popover: 260 40% 10%;
+    --popover-foreground: 220 14% 91%;
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 187 85% 53%;
+    --secondary-foreground: 220 27% 4%;
+    --accent: 330 81% 60%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 220 27% 15%;
+    --muted-foreground: 220 13% 63%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 260 40% 20%;
+    --input: 260 40% 20%;
+    --ring: 271 81% 56%;
+    --sidebar-background: 260 40% 8%;
+    --sidebar-foreground: 220 14% 91%;
+    --sidebar-primary: 271 81% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 187 85% 53%;
+    --sidebar-accent-foreground: 220 27% 4%;
+    --sidebar-border: 260 40% 20%;
+    --sidebar-ring: 271 81% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #070A10;
+  }
+}
+
+@layer utilities {
+  /* ClaimWise Gradient Background */
+  .bg-gradient-claimwise {
+    background: linear-gradient(135deg, #070A10 0%, #0E0C1A 50%, #151028 100%);
+  }
+
+  /* Glow Effects */
+  .glow-purple {
+    background: radial-gradient(circle at center, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+  }
+
+  .glow-pink {
+    background: radial-gradient(circle at center, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
+  }
+
+  .glow-cyan {
+    background: radial-gradient(circle at center, rgba(34, 211, 238, 0.2) 0%, transparent 70%);
+  }
+
+  /* Glassmorphism Cards */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 8px 32px rgba(168, 85, 247, 0.2);
+  }
+
+  /* Neon Text Gradient */
+  .text-gradient-neon {
+    background: linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #22D3EE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Button Glow */
+  .btn-neon {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-neon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-neon:hover::before {
+    left: 100%;
+  }
+
+  .btn-neon:hover {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(236, 72, 153, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Animated Gradient Border */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, #070A10, #0E0C1A, #151028);
+    border-radius: 0.75rem;
+    padding: 2px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    padding: 2px;
+    background: linear-gradient(135deg, #A855F7, #EC4899, #22D3EE);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    animation: gradient-rotate 3s linear infinite;
+  }
+
+  @keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Pulse Glow */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+}
