@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0030_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0030 policy no: pol-3289266 claim date: 2025-10-03 loss date: 2025-09-25 claimant information name: brenda phillips age: 24 contact: 230.890.0906x8567 address: usnv baxter, fpo ap 27203 vehicle information make/model: toyota i20 (2021) registration: pt 86 bq 7682 odometer: 40942 km declared value: i1,200,000 incident details the insured reported a single-vehicle incident where the car hit a pothole causing tire and rim damage and misalignment. no injuries; repair estimate provided. location: 50757 johnson ramp apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 81,
+  "sentiment": 0.6,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

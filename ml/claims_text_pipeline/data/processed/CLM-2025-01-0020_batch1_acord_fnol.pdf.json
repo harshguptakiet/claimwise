@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0020_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0020 policy no: pol-2527853 claim date: 2025-10-19 loss date: 2025-10-11 claimant information name: amber hawkins age: 33 contact: 904.290.1467 address: 9190 gilbert ridges apt. 815, travismouth, sc 30942 vehicle information make/model: mahindra vento (2020) registration: vu 34 ws 9572 odometer: 149938 km declared value: i450,000 incident details while entering the roundabout at andrew port furt, another driver ran a stop sign and clipped the insured s right front fender. small paint transfer and bumper scuffing observed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": 0.2119,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

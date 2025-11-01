@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0016_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0016 policy no: pol-6209233 claim date: 2025-10-22 loss date: 2025-10-20 claimant information name: brian green age: 44 contact: 304.415.8604x9513 address: 27152 anderson isle suite 034, east daniel, ok 33360 vehicle information make/model: ford corolla (2024) registration: zd 77 lu 9653 odometer: 28859 km declared value: i950,000 incident details during reverse parking at santiago-adams parking lot, the insured accidentally hit a stationary pole, scratching the rear quarter panel and bumper. minor cosmetic damage only; no injuries. location: 05110 jamie harbors apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 88,
+  "sentiment": 0.17,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

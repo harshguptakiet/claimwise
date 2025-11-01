@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0029_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0029 policy no: pol-8522916 claim date: 2025-10-04 loss date: 2025-09-29 claimant information name: lacey park age: 35 contact: 2040632832 address: 834 julia crossing apt. 641, elliottfort, fl 47647 vehicle information make/model: ford ecosport (2022) registration: yf 1 dx 3305 odometer: 47904 km declared value: i1,500,000 incident details the insured was involved in a head-on collision on martinez lane borough at 05:45 after the opposing vehicle crossed into the lane. serious damage to both vehicles; injuries reported and police on scene.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 88,
+  "sentiment": 0.1333,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

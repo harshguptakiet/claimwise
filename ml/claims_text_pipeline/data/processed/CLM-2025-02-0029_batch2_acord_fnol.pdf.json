@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0029_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0029 policy no: pol-3971941 claim date: 2025-10-31 loss date: 2025-10-29 claimant information name: tammy simpson age: 38 contact: 903-762-8156x778 address: 2694 heidi forges, maryview, id 38410 vehicle information make/model: hyundai scorpio (2018) registration: tp 50 wp 3424 odometer: 14573 km declared value: i950,000 incident details while driving on douglas orchard berg at approximately 01:50, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 89,
+  "sentiment": -0.1525,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

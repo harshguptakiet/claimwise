@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0018_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0018 policy no: pol-1169833 claim date: 2025-10-02 loss date: 2025-09-25 claimant information name: aaron stone age: 58 contact: 523.557.4697x3031 address: 145 mills lodge suite 750, lake lucasport, ak 11412 vehicle information make/model: toyota ecosport (2022) registration: oo 31 ao 3352 odometer: 146660 km declared value: i600,000 incident details while driving on moore plain burgh at approximately 12:50, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 92,
+  "sentiment": -0.1628,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

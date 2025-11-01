@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-02-0023_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0023 policy no: pol-8277380 claim date: 2025-10-17 loss date: 2025-10-11 claimant information name: angela summers md age: 63 contact: 647.043.3436 address: psc 1597, box 6758, apo ap 11347 vehicle information make/model: hyundai scorpio (2023) registration: hn 30 is 1795 odometer: 78233 km declared value: i800,000 incident details the insured parked the vehicle outside woods-weber parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 89,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

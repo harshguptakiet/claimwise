@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0021_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0021 policy no: pol-1587274 claim date: 2025-10-14 loss date: 2025-10-06 claimant information name: douglas carney age: 28 contact: 709-556-1929x69156 address: 399 arnold meadow apt. 449, mercedesville, wi 58682 vehicle information make/model: toyota scorpio (2019) registration: ci 6 jk 3885 odometer: 85118 km declared value: i950,000 incident details while entering the roundabout at jennifer ports land, another driver ran a stop sign and clipped the insured s right front fender. small paint transfer and bumper scuffing observed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": 0.2119,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

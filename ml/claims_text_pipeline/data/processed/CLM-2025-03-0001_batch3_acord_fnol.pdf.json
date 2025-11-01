@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0001_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0001 policy no: pol-6492848 claim date: 2025-10-08 loss date: 2025-10-03 claimant information name: stacy ruiz age: 72 contact: (298)072-1381x360 address: 298 traci islands suite 567, gregoryshire, me 71998 vehicle information make/model: honda i20 (2023) registration: lm 39 ks 7889 odometer: 98762 km declared value: i950,000 incident details the insured collided with a stray animal (deer) on andrea summit haven during low visibility at 21:35. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": -0.125,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

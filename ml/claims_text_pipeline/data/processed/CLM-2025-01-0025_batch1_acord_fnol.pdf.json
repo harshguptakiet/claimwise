@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0025_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0025 policy no: pol-7703288 claim date: 2025-10-31 loss date: 2025-10-24 claimant information name: randy meza age: 58 contact: 116-660-3667 address: 5944 tonya neck apt. 279, south miranda, vt 53639 vehicle information make/model: toyota vento (2022) registration: bg 70 tg 2040 odometer: 37429 km declared value: i450,000 incident details the insured collided with a stray animal (deer) on larry mall port during low visibility at 05:05. significant front-end damage and radiator leak.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 79,
+  "sentiment": 0.325,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

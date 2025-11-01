@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-04-0008_batch4_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-04-0008 policy no: pol-5959684 claim date: 2025-10-11 loss date: 2025-10-11 claimant information name: diane morris age: 26 contact: 248-343-9494x212 address: 436 brown harbors, sweeneyside, ar 04707 vehicle information make/model: volkswagen vento (2014) registration: gv 60 xi 9767 odometer: 106413 km declared value: i1,200,000 incident details the insured parked the vehicle outside wolfe, hunt and schmidt parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

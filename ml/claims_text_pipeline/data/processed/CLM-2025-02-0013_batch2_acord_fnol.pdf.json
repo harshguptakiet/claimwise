@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0013_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0013 policy no: pol-6620056 claim date: 2025-10-25 loss date: 2025-10-23 claimant information name: andrew smith age: 57 contact: 797-632-4722x077 address: 7574 curry ford, donaldville, or 92240 vehicle information make/model: hyundai scorpio (2019) registration: nn 11 gr 4606 odometer: 7659 km declared value: i600,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at porter-diaz parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 78,
+  "sentiment": 0.0,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

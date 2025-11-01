@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0012_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0012 policy no: pol-2039295 claim date: 2025-10-13 loss date: 2025-10-13 claimant information name: tracy oliver age: 66 contact: 194-258-6498x4923 address: 4013 herrera wall apt. 786, vargasstad, ms 91266 vehicle information make/model: skoda vento (2015) registration: xj 97 yi 6244 odometer: 65405 km declared value: i450,000 incident details while entering the roundabout at anderson turnpike chester, another driver ran a stop sign and clipped the insured s right front fender. small paint transfer and bumper scuffing observed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": 0.2119,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

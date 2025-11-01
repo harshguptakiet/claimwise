@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0017_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0017 policy no: pol-5538309 claim date: 2025-10-02 loss date: 2025-09-28 claimant information name: mario williams age: 23 contact: 1-940-048-6753x9094 address: uscgc lucas, fpo ap 77046 vehicle information make/model: maruti ecosport (2020) registration: tf 18 ab 1526 odometer: 31011 km declared value: i600,000 incident details the insured collided with a stray animal (deer) on maria land haven during low visibility at 09:10. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 81,
+  "sentiment": 0.1875,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

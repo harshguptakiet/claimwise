@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-02-0002_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0002 policy no: pol-7382694 claim date: 2025-10-14 loss date: 2025-10-06 claimant information name: bradley allison age: 41 contact: 402-512-0670x072 address: 305 madeline trail, michaelshire, ct 10370 vehicle information make/model: honda civic (2021) registration: jd 12 ym 6979 odometer: 123012 km declared value: i450,000 incident details the insured parked the vehicle outside wood, padilla and powell parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

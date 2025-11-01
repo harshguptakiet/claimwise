@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-02-0001_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0001 policy no: pol-3879566 claim date: 2025-10-17 loss date: 2025-10-10 claimant information name: jennifer graham age: 29 contact: (037)661-7511x05793 address: 8539 bailey knolls suite 722, south tracy, nj 27739 vehicle information make/model: honda swift (2020) registration: ut 21 pc 4885 odometer: 100824 km declared value: i800,000 incident details the insured parked the vehicle outside green-acosta parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": -0.1875,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

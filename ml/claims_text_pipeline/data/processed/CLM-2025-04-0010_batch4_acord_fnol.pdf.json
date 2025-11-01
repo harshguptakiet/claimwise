@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-04-0010_batch4_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-04-0010 policy no: pol-8579223 claim date: 2025-10-07 loss date: 2025-10-06 claimant information name: crystal french age: 67 contact: 253-266-8065 address: 80132 timothy river, carlberg, nh 39752 vehicle information make/model: skoda i20 (2015) registration: hb 81 yh 9936 odometer: 153794 km declared value: i800,000 incident details on 2025-10-06 at around 19:10, the insured vehicle was stopped at a red light on ochoa greens ton when it was rear-ended by another car. the insured reported minor neck pain and the vehicle s rear bumper and trunk were damaged. location: 6744 maxwell lake apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 99,
+  "sentiment": 0.19,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

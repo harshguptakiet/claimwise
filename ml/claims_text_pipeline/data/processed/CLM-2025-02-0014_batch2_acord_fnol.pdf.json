@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0014_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0014 policy no: pol-7756806 claim date: 2025-10-18 loss date: 2025-10-12 claimant information name: katherine williams age: 21 contact: 349.455.3013x47434 address: 4947 shane key apt. 448, east sandraburgh, ne 25030 vehicle information make/model: hyundai civic (2019) registration: hr 33 ug 3933 odometer: 127680 km declared value: i950,000 incident details the insured was involved in a head-on collision on jenkins ferry berg at 20:00 after the opposing vehicle crossed into the lane. serious damage to both vehicles; injuries reported and police on scene.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 89,
+  "sentiment": 0.0889,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

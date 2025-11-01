@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-04-0003_batch4_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-04-0003 policy no: pol-1081400 claim date: 2025-10-27 loss date: 2025-10-27 claimant information name: zachary olson age: 21 contact: 1-726-246-1743x74933 address: 1323 mark inlet, port brianna, ms 41355 vehicle information make/model: hyundai corolla (2014) registration: af 25 hm 1221 odometer: 145486 km declared value: i450,000 incident details the insured was involved in a head-on collision on harvey wells port at 22:15 after the opposing vehicle crossed into the lane. serious damage to both vehicles; injuries reported and police on scene. location: 3049 hill terrace apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 92,
+  "sentiment": 0.1333,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

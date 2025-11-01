@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-03-0003_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0003 policy no: pol-9227984 claim date: 2025-10-12 loss date: 2025-10-04 claimant information name: sharon hensley age: 51 contact: 001-743-166-7819x558 address: 380 kelly valley, east keithmouth, pa 48786 vehicle information make/model: maruti vento (2015) registration: nl 85 ca 7112 odometer: 16419 km declared value: i450,000 incident details the insured parked the vehicle outside davidson and sons parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

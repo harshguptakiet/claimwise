@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0006_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0006 policy no: pol-8001124 claim date: 2025-10-21 loss date: 2025-10-16 claimant information name: christine robertson age: 28 contact: 574-600-4203 address: 4021 hannah dam, east todd, ri 77123 vehicle information make/model: maruti civic (2018) registration: ed 15 rb 6474 odometer: 43703 km declared value: i450,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at rodriguez, rowe and harris parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 82,
+  "sentiment": 0.0,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

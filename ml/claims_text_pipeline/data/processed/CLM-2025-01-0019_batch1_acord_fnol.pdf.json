@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0019_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0019 policy no: pol-1730487 claim date: 2025-10-14 loss date: 2025-10-10 claimant information name: stacey vazquez age: 36 contact: (956)274-0072 address: 496 ayala place suite 332, new shannonborough, mn 89168 vehicle information make/model: toyota corolla (2021) registration: yk 96 ma 1641 odometer: 65347 km declared value: i350,000 incident details while driving on schneider avenue ville at approximately 17:05, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 92,
+  "sentiment": -0.1966,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

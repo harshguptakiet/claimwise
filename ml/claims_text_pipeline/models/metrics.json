@@ -1,0 +1,137 @@
+{
+  "severity_model": {
+    "model": "severity_model",
+    "target": "severity_level",
+    "accuracy": 1.0,
+    "f1_weighted": 1.0,
+    "report": {
+      "Low": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Medium": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 15.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        5,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ]
+  },
+  "fraud_model": {
+    "model": "fraud_model",
+    "target": "fraud_flag",
+    "accuracy": 1.0,
+    "f1_weighted": 1.0,
+    "report": {
+      "0": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 17.0
+      },
+      "1": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 3.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        17,
+        0
+      ],
+      [
+        0,
+        3
+      ]
+    ]
+  },
+  "routing_model": {
+    "model": "routing_model",
+    "target": "routing_team",
+    "accuracy": 1.0,
+    "f1_weighted": 1.0,
+    "report": {
+      "Auto_Claims": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 5.0
+      },
+      "Health_Claims": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 15.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 20.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        5,
+        0
+      ],
+      [
+        0,
+        15
+      ]
+    ]
+  },
+  "complexity_model": {
+    "model": "complexity_model",
+    "target": "complexity_score",
+    "r2": 1.0,
+    "mae": 0.0
+  }
+}

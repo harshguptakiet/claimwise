@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-03-0025_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0025 policy no: pol-4297325 claim date: 2025-10-30 loss date: 2025-10-20 claimant information name: joshua thomas age: 23 contact: 767.666.3070 address: 22612 acosta heights apt. 007, lake michelle, fl 79785 vehicle information make/model: volkswagen octavia (2016) registration: ll 19 qv 4953 odometer: 54953 km declared value: i600,000 incident details the insured parked the vehicle outside wagner-ford parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 87,
+  "sentiment": 0.15,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

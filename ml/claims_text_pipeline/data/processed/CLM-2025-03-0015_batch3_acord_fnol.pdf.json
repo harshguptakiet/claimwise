@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-03-0015_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0015 policy no: pol-9493199 claim date: 2025-10-01 loss date: 2025-09-22 claimant information name: kaitlyn manning age: 46 contact: 3752557922 address: 837 white glens suite 986, west raymond, mt 27629 vehicle information make/model: mahindra scorpio (2022) registration: un 6 oc 7744 odometer: 77109 km declared value: i1,500,000 incident details the insured parked the vehicle outside petersen-davis parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0024_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0024 policy no: pol-3211252 claim date: 2025-10-16 loss date: 2025-10-11 claimant information name: patricia owens age: 51 contact: 918-569-8842x445 address: 1317 bradley drive apt. 440, west maria, ct 95748 vehicle information make/model: ford swift (2024) registration: bi 87 yg 7748 odometer: 74518 km declared value: i600,000 incident details the insured collided with a stray animal (deer) on lisa pines town during low visibility at 08:05. significant front-end damage and radiator leak.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 79,
+  "sentiment": 0.325,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0007_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0007 policy no: pol-3412632 claim date: 2025-10-19 loss date: 2025-10-12 claimant information name: kyle preston age: 43 contact: 902.560.8063x9309 address: 1514 ethan motorway, new shariberg, sd 74342 vehicle information make/model: volkswagen swift (2021) registration: lh 12 st 3210 odometer: 74527 km declared value: i800,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at clark llc parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 80,
+  "sentiment": 0.0682,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

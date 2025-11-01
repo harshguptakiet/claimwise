@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0008_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0008 policy no: pol-5006172 claim date: 2025-10-24 loss date: 2025-10-14 claimant information name: jerry smith age: 31 contact: 125-407-0530x367 address: 01980 baxter drive, east ronald, ny 53852 vehicle information make/model: toyota vento (2023) registration: ft 27 zy 8909 odometer: 89641 km declared value: i600,000 incident details the insured was involved in a head-on collision on william way view at 00:50 after the opposing vehicle crossed into the lane. serious damage to both vehicles; injuries reported and police on scene. location: 275 mccullough curve apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 92,
+  "sentiment": 0.1333,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

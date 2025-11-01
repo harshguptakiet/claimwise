@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-01-0003_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0003 policy no: pol-8241039 claim date: 2025-10-11 loss date: 2025-10-02 claimant information name: tiffany vincent age: 22 contact: 542.552.6397 address: 236 marsh unions, north olivia, va 94111 vehicle information make/model: mahindra swift (2019) registration: ql 30 lq 9912 odometer: 86804 km declared value: i950,000 incident details the insured parked the vehicle outside quinn-chavez parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 88,
+  "sentiment": 0.0,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

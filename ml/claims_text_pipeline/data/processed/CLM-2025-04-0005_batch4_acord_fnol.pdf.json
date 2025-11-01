@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-04-0005_batch4_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-04-0005 policy no: pol-3118483 claim date: 2025-10-17 loss date: 2025-10-16 claimant information name: william jensen age: 27 contact: 004.442.4834x10108 address: 3271 lisa corners suite 226, port jean, la 04037 vehicle information make/model: volkswagen vento (2020) registration: ia 81 dg 9602 odometer: 107930 km declared value: i1,500,000 incident details while driving on patricia skyway mouth at approximately 19:00, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 92,
+  "sentiment": -0.1525,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

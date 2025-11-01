@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0027_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0027 policy no: pol-4498395 claim date: 2025-10-10 loss date: 2025-10-06 claimant information name: shawn peters age: 38 contact: 606-445-5180x42036 address: 8178 mosley point apt. 832, smithtown, in 14020 vehicle information make/model: mahindra octavia (2020) registration: st 5 fs 6590 odometer: 62965 km declared value: i600,000 incident details at about 18:50 on 2025-10-06, the insured was changing lanes on sharon court mouth when a commercial truck clipped the left rear, causing loss of control and collision with the guardrail. driver complained of ankle pain and was taken to hospital.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 96,
+  "sentiment": 0.075,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

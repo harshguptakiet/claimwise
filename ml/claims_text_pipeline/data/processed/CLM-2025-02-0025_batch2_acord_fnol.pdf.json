@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-02-0025_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0025 policy no: pol-1488352 claim date: 2025-10-10 loss date: 2025-10-09 claimant information name: emily tapia age: 42 contact: (158)276-9714x0811 address: 5486 larson lodge, port sherri, mt 55297 vehicle information make/model: volkswagen vento (2014) registration: sa 54 xj 7602 odometer: 134378 km declared value: i350,000 incident details while driving on colin green view at approximately 03:20, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": -0.2446,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "arson"
+  ]
+}

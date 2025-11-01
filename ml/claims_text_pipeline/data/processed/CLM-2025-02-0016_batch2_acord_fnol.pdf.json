@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0016_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0016 policy no: pol-5326657 claim date: 2025-10-04 loss date: 2025-09-27 claimant information name: alexander kennedy age: 29 contact: 421-425-8001x6020 address: 30386 kimberly prairie, port craig, nc 96865 vehicle information make/model: ford civic (2022) registration: yt 86 hg 9670 odometer: 114310 km declared value: i600,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at rush-galvan parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 79,
+  "sentiment": 0.0,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

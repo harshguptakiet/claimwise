@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0009_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0009 policy no: pol-1314589 claim date: 2025-10-19 loss date: 2025-10-10 claimant information name: laura clark age: 74 contact: (742)156-6131x883 address: 79316 daniel knolls, west michelle, nj 83017 vehicle information make/model: ford scorpio (2019) registration: yn 87 mw 4254 odometer: 146864 km declared value: i600,000 incident details the insured collided with a stray animal (deer) on jennifer shores haven during low visibility at 14:00. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 83,
+  "sentiment": -0.125,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

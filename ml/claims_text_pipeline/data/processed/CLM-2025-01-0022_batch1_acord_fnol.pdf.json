@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0022_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0022 policy no: pol-8244792 claim date: 2025-10-26 loss date: 2025-10-20 claimant information name: frank russell age: 40 contact: 1825429760 address: 6138 jason village apt. 879, stanleyside, wy 58577 vehicle information make/model: maruti vento (2024) registration: nv 88 ir 6556 odometer: 24886 km declared value: i800,000 incident details during reverse parking at welch inc parking lot, the insured accidentally hit a stationary pole, scratching the rear quarter panel and bumper. minor cosmetic damage only; no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 83,
+  "sentiment": 0.1833,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

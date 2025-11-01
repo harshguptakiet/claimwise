@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0005_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0005 policy no: pol-7096258 claim date: 2025-10-27 loss date: 2025-10-21 claimant information name: brandon wilson age: 35 contact: 001-580-287-4154x417 address: 4000 turner mews apt. 258, carolynberg, dc 20566 vehicle information make/model: volkswagen civic (2015) registration: th 66 ia 3510 odometer: 114788 km declared value: i450,000 incident details during reverse parking at young inc parking lot, the insured accidentally hit a stationary pole, scratching the rear quarter panel and bumper. minor cosmetic damage only; no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 83,
+  "sentiment": 0.1625,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

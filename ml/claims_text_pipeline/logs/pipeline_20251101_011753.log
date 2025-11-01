@@ -1,0 +1,34 @@
+2025-11-01 01:17:53 | INFO | utils.file_utils | Logging to C:\claims_agent\claims_text_pipeline\logs\pipeline_20251101_011753.log
+2025-11-01 01:17:53 | INFO | utils.file_utils | Imported 10 file(s) from dataset source: C:\claims_agent\dataset into C:\claims_agent\claims_text_pipeline\data\raw
+2025-11-01 01:17:53 | INFO | __main__ | Found 30 file(s) to process.
+2025-11-01 01:17:53 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00001_acord_fnol.pdf.json
+2025-11-01 01:17:53 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00002_acord_fnol.pdf.json
+2025-11-01 01:17:53 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00003_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00004_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00005_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00006_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00007_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00008_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00009_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00010_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00011_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00012_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00013_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00014_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00015_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00016_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00017_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00018_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00019_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00020_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00021_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00022_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00023_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00024_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00025_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00026_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00027_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00028_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00029_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Processed and saved: C:\claims_agent\claims_text_pipeline\data\processed\CLM-2025-00030_acord_fnol.pdf.json
+2025-11-01 01:17:54 | INFO | __main__ | Pipeline complete. Dataset saved to: C:\claims_agent\claims_text_pipeline\data\dataset.csv

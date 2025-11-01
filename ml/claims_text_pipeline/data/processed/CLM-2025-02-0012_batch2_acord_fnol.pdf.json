@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0012_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0012 policy no: pol-4100589 claim date: 2025-10-12 loss date: 2025-10-06 claimant information name: nicole alexander age: 57 contact: 001-049-959-9467x7007 address: 28707 ingram junctions apt. 143, port jessicaton, tn 65994 vehicle information make/model: hyundai scorpio (2024) registration: me 92 ey 7268 odometer: 83244 km declared value: i450,000 incident details the insured reported a single-vehicle incident where the car hit a pothole causing tire and rim damage and misalignment. no injuries; repair estimate provided.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 80,
+  "sentiment": 0.6,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

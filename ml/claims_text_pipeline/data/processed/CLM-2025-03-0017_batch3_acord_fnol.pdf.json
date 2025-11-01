@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0017_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0017 policy no: pol-3726889 claim date: 2025-10-27 loss date: 2025-10-21 claimant information name: christine hines age: 45 contact: 6019350957 address: 267 nelson trace apt. 731, jacksonburgh, mi 87973 vehicle information make/model: skoda octavia (2016) registration: cc 77 zu 4088 odometer: 120503 km declared value: i950,000 incident details the insured collided with a stray animal (deer) on barnett plain bury during low visibility at 07:05. significant front-end damage and radiator leak.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 78,
+  "sentiment": 0.1902,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

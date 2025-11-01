@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0020_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0020 policy no: pol-9367650 claim date: 2025-10-13 loss date: 2025-10-13 claimant information name: zachary roberson age: 54 contact: 001-329-325-1787x48171 address: 1389 foster isle, jeffreyhaven, wv 28151 vehicle information make/model: skoda i20 (2017) registration: oo 63 aj 4713 odometer: 48710 km declared value: i800,000 incident details while driving on christine shoal town at approximately 02:15, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 89,
+  "sentiment": -0.1525,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0009_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0009 policy no: pol-2522246 claim date: 2025-10-07 loss date: 2025-10-02 claimant information name: michael brown age: 70 contact: 241.747.9112x618 address: uscgc green, fpo aa 92063 vehicle information make/model: toyota civic (2014) registration: zn 89 pp 2869 odometer: 53058 km declared value: i1,200,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at stuart and sons parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 79,
+  "sentiment": -0.1,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

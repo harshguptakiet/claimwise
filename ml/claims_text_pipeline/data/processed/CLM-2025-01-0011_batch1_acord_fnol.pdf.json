@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-01-0011_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0011 policy no: pol-6021497 claim date: 2025-10-27 loss date: 2025-10-27 claimant information name: jocelyn dean age: 34 contact: (020)881-0550x29483 address: 4948 anna lane suite 942, whiteport, nm 89985 vehicle information make/model: mahindra civic (2018) registration: vk 37 ot 1251 odometer: 24238 km declared value: i450,000 incident details the insured parked the vehicle outside jackson-velasquez parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin. no injuries reported.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 89,
+  "sentiment": -0.1875,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

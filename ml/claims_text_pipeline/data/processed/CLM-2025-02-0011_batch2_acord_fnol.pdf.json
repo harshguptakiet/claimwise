@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0011_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0011 policy no: pol-1959942 claim date: 2025-10-12 loss date: 2025-10-11 claimant information name: todd garcia age: 50 contact: 001-254-211-3477x675 address: 3804 hughes bypass apt. 458, west brianport, ok 14811 vehicle information make/model: skoda swift (2024) registration: ah 5 du 2413 odometer: 26583 km declared value: i1,200,000 incident details on 2025-10-11 at around 01:15, the insured vehicle was stopped at a red light on griffith green side when it was rear-ended by another car. the insured reported minor neck pain and the vehicle s rear bumper and trunk were damaged.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 97,
+  "sentiment": 0.2083,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0024_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0024 policy no: pol-2751283 claim date: 2025-10-05 loss date: 2025-09-30 claimant information name: leslie salazar age: 29 contact: 1-324-816-8227 address: 97623 bradley grove suite 771, danielsburgh, oh 40576 vehicle information make/model: mahindra scorpio (2022) registration: cx 57 ih 5521 odometer: 37048 km declared value: i600,000 incident details the insured collided with a stray animal (deer) on tony trafficway borough during low visibility at 04:20. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": 0.1875,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

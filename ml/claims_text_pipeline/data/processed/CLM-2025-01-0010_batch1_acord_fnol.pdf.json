@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0010_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0010 policy no: pol-8993221 claim date: 2025-10-16 loss date: 2025-10-14 claimant information name: jessica chambers age: 33 contact: 830.843.8007x9013 address: 7705 ball dale suite 326, sandrachester, nh 12437 vehicle information make/model: maruti i20 (2020) registration: mx 94 rg 5607 odometer: 36213 km declared value: i450,000 incident details the insured collided with a stray animal (deer) on carpenter manor view during low visibility at 08:45. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 84,
+  "sentiment": 0.1875,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

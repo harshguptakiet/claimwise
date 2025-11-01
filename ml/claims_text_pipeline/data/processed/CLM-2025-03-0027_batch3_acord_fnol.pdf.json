@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0027_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0027 policy no: pol-6706093 claim date: 2025-10-27 loss date: 2025-10-25 claimant information name: katie johnson age: 27 contact: (120)779-0920 address: 9399 john views, andersonland, wa 83951 vehicle information make/model: hyundai octavia (2020) registration: su 27 dk 4392 odometer: 83513 km declared value: i350,000 incident details the insured s vehicle was vandalized with key scratches along the driver s side while parked at christensen, taylor and ramos parking lot. cctv footage requested. no injuries.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 81,
+  "sentiment": -0.375,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

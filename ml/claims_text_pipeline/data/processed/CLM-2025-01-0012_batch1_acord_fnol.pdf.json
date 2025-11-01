@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0012_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0012 policy no: pol-4423762 claim date: 2025-10-11 loss date: 2025-10-06 claimant information name: evan martinez age: 29 contact: 1-219-367-2630 address: 5035 pratt forest apt. 615, port cassandra, mn 72295 vehicle information make/model: mahindra octavia (2021) registration: ot 32 il 3736 odometer: 150424 km declared value: i600,000 incident details at about 19:45 on 2025-10-06, the insured was changing lanes on jonathan drive furt when a commercial truck clipped the left rear, causing loss of control and collision with the guardrail. driver complained of ankle pain and was taken to hospital.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 97,
+  "sentiment": 0.075,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0024_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0024 policy no: pol-1252108 claim date: 2025-10-22 loss date: 2025-10-13 claimant information name: darrell cochran age: 58 contact: (656)002-2298 address: unit 5912 box 0737, dpo ap 76710 vehicle information make/model: mahindra ecosport (2020) registration: dm 88 bd 9157 odometer: 15760 km declared value: i800,000 incident details on 2025-10-13 at around 14:10, the insured vehicle was stopped at a red light on miller fields mouth when it was rear-ended by another car. the insured reported minor neck pain and the vehicle s rear bumper and trunk were damaged. location: 7254 juarez port apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 100,
+  "sentiment": 0.04,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

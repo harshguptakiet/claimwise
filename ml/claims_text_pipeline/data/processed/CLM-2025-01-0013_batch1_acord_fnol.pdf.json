@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0013_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0013 policy no: pol-1801473 claim date: 2025-10-05 loss date: 2025-09-30 claimant information name: julie weaver age: 40 contact: 1-121-424-4641x283 address: 76710 christopher prairie apt. 305, lunaport, tn 00524 vehicle information make/model: honda swift (2021) registration: zb 65 pr 7783 odometer: 35484 km declared value: i800,000 incident details the insured was involved in a head-on collision on tim canyon mouth at 10:35 after the opposing vehicle crossed into the lane. serious damage to both vehicles; injuries reported and police on scene.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 88,
+  "sentiment": 0.1333,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

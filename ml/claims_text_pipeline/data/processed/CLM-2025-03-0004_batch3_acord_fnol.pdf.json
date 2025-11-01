@@ -1,0 +1,15 @@
+{
+  "file_name": "CLM-2025-03-0004_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0004 policy no: pol-7774933 claim date: 2025-10-17 loss date: 2025-10-14 claimant information name: robert bailey age: 26 contact: 1-850-409-5267 address: 1621 nancy village apt. 152, south lisa, ne 13565 vehicle information make/model: ford ecosport (2018) registration: cq 7 az 3731 odometer: 37660 km declared value: i600,000 incident details the insured parked the vehicle outside santiago llc parking lot overnight. the next morning it was discovered that the rear window had been smashed and personal items were stolen from the cabin.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 88,
+  "sentiment": 0.15,
+  "fraud_flag": true,
+  "fraud_flags": [
+    "stolen"
+  ]
+}

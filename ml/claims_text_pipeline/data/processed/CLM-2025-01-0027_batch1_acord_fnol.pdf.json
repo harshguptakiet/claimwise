@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0027_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0027 policy no: pol-9127081 claim date: 2025-10-08 loss date: 2025-10-02 claimant information name: ronald alvarez age: 52 contact: 364-444-4652x241 address: 8141 timothy burgs apt. 599, alexandertown, mo 08975 vehicle information make/model: honda vento (2015) registration: pd 11 dn 5044 odometer: 17072 km declared value: i1,500,000 incident details the insured collided with a stray animal (deer) on brittany gateway borough during low visibility at 06:20. significant front-end damage and radiator leak.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 78,
+  "sentiment": 0.325,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

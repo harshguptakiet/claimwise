@@ -1,0 +1,135 @@
+{
+  "fraud_model": {
+    "accuracy": 1.0,
+    "f1_weighted": 1.0,
+    "report": {
+      "0": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 44.0
+      },
+      "1": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 6.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 50.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 50.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        44,
+        0
+      ],
+      [
+        0,
+        6
+      ]
+    ],
+    "features": [
+      "damage_difference",
+      "injury_mismatch",
+      "date_difference_days",
+      "location_match",
+      "vehicle_match",
+      "rc_match",
+      "dl_match",
+      "patient_match",
+      "hospital_match",
+      "fraud_inconsistency_score",
+      "severity_numeric",
+      "complexity_score",
+      "category_id"
+    ]
+  },
+  "severity_model": {
+    "accuracy": 1.0,
+    "f1_weighted": 1.0,
+    "report": {
+      "High": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 6.0
+      },
+      "Low": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 44.0
+      },
+      "accuracy": 1.0,
+      "macro avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 50.0
+      },
+      "weighted avg": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 50.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        6,
+        0
+      ],
+      [
+        0,
+        44
+      ]
+    ],
+    "features": [
+      "damage_difference",
+      "injury_mismatch",
+      "date_difference_days",
+      "location_match",
+      "vehicle_match",
+      "rc_match",
+      "dl_match",
+      "patient_match",
+      "hospital_match",
+      "fraud_inconsistency_score",
+      "complexity_score",
+      "category_id"
+    ],
+    "classes": [
+      "High",
+      "Low"
+    ]
+  },
+  "complexity_model": {
+    "r2": 0.981998922413793,
+    "mae": 0.02166666666666667,
+    "features": [
+      "damage_difference",
+      "injury_mismatch",
+      "date_difference_days",
+      "location_match",
+      "vehicle_match",
+      "rc_match",
+      "dl_match",
+      "patient_match",
+      "hospital_match",
+      "fraud_inconsistency_score",
+      "severity_numeric",
+      "category_id"
+    ]
+  }
+}

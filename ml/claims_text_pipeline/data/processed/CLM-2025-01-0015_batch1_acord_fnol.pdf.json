@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0015_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0015 policy no: pol-2689883 claim date: 2025-10-27 loss date: 2025-10-24 claimant information name: joshua walker age: 41 contact: 385-092-8662 address: 93743 melissa estates apt. 039, mollyfurt, hi 06270 vehicle information make/model: honda octavia (2016) registration: au 51 dx 8942 odometer: 79140 km declared value: i350,000 incident details at about 05:45 on 2025-10-24, the insured was changing lanes on williams route view when a commercial truck clipped the left rear, causing loss of control and collision with the guardrail. driver complained of ankle pain and was taken to hospital.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 96,
+  "sentiment": 0.075,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

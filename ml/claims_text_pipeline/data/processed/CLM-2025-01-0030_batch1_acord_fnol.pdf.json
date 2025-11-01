@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0030_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0030 policy no: pol-4454099 claim date: 2025-10-09 loss date: 2025-10-02 claimant information name: sheryl brown age: 67 contact: 1-176-299-1583x8193 address: usns wallace, fpo ae 79397 vehicle information make/model: ford swift (2015) registration: nj 21 nx 1263 odometer: 60518 km declared value: i350,000 incident details the insured reported a single-vehicle incident where the car hit a pothole causing tire and rim damage and misalignment. no injuries; repair estimate provided. location: 738 butler oval apt.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 81,
+  "sentiment": 0.6,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

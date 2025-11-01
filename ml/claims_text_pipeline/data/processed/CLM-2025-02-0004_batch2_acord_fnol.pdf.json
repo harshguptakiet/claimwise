@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-02-0004_batch2_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-02-0004 policy no: pol-5923473 claim date: 2025-10-11 loss date: 2025-10-11 claimant information name: cindy estes age: 72 contact: 4717896923 address: 29169 taylor dale apt. 141, montgomeryville, or 29677 vehicle information make/model: toyota ecosport (2022) registration: vc 51 yl 8482 odometer: 92300 km declared value: i1,200,000 incident details at about 18:00 on 2025-10-11, the insured was changing lanes on jacob square ville when a commercial truck clipped the left rear, causing loss of control and collision with the guardrail. driver complained of ankle pain and was taken to hospital.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 96,
+  "sentiment": 0.075,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

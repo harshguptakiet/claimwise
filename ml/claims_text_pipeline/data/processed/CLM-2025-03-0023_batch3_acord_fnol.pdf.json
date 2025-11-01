@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0023_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0023 policy no: pol-3083064 claim date: 2025-10-11 loss date: 2025-10-06 claimant information name: catherine hanna age: 67 contact: 171.451.2729x77915 address: unit 7879 box 5613, dpo aa 24062 vehicle information make/model: ford vento (2022) registration: mg 24 pm 1449 odometer: 48755 km declared value: i1,200,000 incident details the insured collided with a stray animal (deer) on cassie meadow stad during low visibility at 02:10. significant front-end damage and radiator leak. tow truck dispatched to remove vehicle.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 83,
+  "sentiment": 0.1875,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

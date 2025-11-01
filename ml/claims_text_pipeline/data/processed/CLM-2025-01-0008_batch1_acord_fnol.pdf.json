@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0008_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0008 policy no: pol-2664755 claim date: 2025-10-05 loss date: 2025-09-25 claimant information name: patrick martinez age: 73 contact: 290.841.2352x862 address: 3239 samuel station, lake larry, ct 55522 vehicle information make/model: skoda octavia (2019) registration: yp 54 sn 1802 odometer: 80466 km declared value: i350,000 incident details while driving on mason underpass port at approximately 03:50, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": -0.1525,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

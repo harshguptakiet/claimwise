@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-03-0019_batch3_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-03-0019 policy no: pol-8703496 claim date: 2025-10-16 loss date: 2025-10-06 claimant information name: james walker age: 69 contact: 1-573-311-6415 address: 95972 kyle mountains suite 773, amberburgh, tn 27156 vehicle information make/model: skoda octavia (2016) registration: xn 92 tn 9238 odometer: 70450 km declared value: i450,000 incident details while driving on gardner prairie haven at approximately 08:10, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 91,
+  "sentiment": -0.1525,
+  "fraud_flag": false,
+  "fraud_flags": []
+}

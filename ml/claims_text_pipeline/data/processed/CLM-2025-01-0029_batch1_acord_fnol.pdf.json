@@ -1,0 +1,13 @@
+{
+  "file_name": "CLM-2025-01-0029_batch1_acord_fnol.pdf",
+  "policy_number": "INFORMATION",
+  "claim_number": "POLICY",
+  "incident_date": "31/10/2025",
+  "description": "generated: 2025-10-31 19:06:28 claim policy information claim id: clm-2025-01-0029 policy no: pol-3449414 claim date: 2025-10-23 loss date: 2025-10-21 claimant information name: charles jones age: 61 contact: (890)729-5594 address: 5976 anita burg, west sharon, mn 33924 vehicle information make/model: volkswagen ecosport (2021) registration: ms 16 ye 5799 odometer: 78898 km declared value: i350,000 incident details while driving on tina causeway side at approximately 05:50, the insured lost control on the wet surface due to heavy rain and skidded into a roadside divider. no other vehicles involved. front-end damage observed; airbag deployed.",
+  "estimated_damage": 202.0,
+  "police_report": true,
+  "word_count": 90,
+  "sentiment": -0.2521,
+  "fraud_flag": false,
+  "fraud_flags": []
+}
