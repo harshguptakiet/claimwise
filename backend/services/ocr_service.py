@@ -1,8 +1,13 @@
 import os
+import shutil
+import io
 from typing import Dict, Optional, Tuple, List
 import re
+import logging
 
 # Optional deps: keep imports lazy and guarded
+
+logger = logging.getLogger(__name__)
 
 
 def _is_pdf(path: str) -> bool:
@@ -13,11 +18,75 @@ def _is_image(path: str) -> bool:
     return os.path.splitext(path)[1].lower() in {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".bmp", ".webp"}
 
 
-def extract_text(file_path: str) -> Tuple[str, Dict[str, str]]:
-    """Extract text from a file.
+def _configure_tesseract_cmd() -> None:
+    """
+    Try to set pytesseract.pytesseract.tesseract_cmd on Windows if not found in PATH.
+    """
+    try:
+        import pytesseract  # type: ignore
+        if shutil.which("tesseract"):
+            return
+        common_win_path = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+        if os.path.exists(common_win_path):
+            pytesseract.pytesseract.tesseract_cmd = common_win_path
+    except Exception:
+        pass
 
-    - PDFs: PyPDF2 (if installed)
-    - Images: pytesseract + Pillow (if installed)
+
+def _auto_orient(img) -> object:
+    """Auto-orient image based on EXIF data."""
+    try:
+        from PIL import ImageOps  # type: ignore
+        img = ImageOps.exif_transpose(img)
+    except Exception:
+        pass
+    return img
+
+
+def _detect_and_fix_rotation(img) -> object:
+    """
+    Use Tesseract OSD to detect rotation; rotate if angle is 90/180/270.
+    """
+    try:
+        import pytesseract  # type: ignore
+        _configure_tesseract_cmd()
+        osd = pytesseract.image_to_osd(img)
+        angle = 0
+        for line in osd.splitlines():
+            if "Rotate:" in line:
+                try:
+                    angle = int(line.split(":")[1].strip())
+                except Exception:
+                    angle = 0
+                break
+        if angle and angle in (90, 180, 270):
+            return img.rotate(360 - angle, expand=True)
+    except Exception:
+        # OSD might fail; ignore and return original
+        return img
+    return img
+
+
+def _ocr_image_pil(img, psm: int = 3, lang: str = "eng") -> str:
+    """Perform OCR on a PIL Image with preprocessing."""
+    try:
+        import pytesseract  # type: ignore
+        _configure_tesseract_cmd()
+        img = _auto_orient(img)
+        img = _detect_and_fix_rotation(img)
+        config = f"--psm {psm} --oem 3"
+        text = pytesseract.image_to_string(img, lang=lang, config=config)
+        return text or ""
+    except Exception as e:
+        logger.warning(f"OCR failed: {e}")
+        return ""
+
+
+def extract_text(file_path: str) -> Tuple[str, Dict[str, str]]:
+    """Extract text from a file with OCR fallback for scanned PDFs.
+
+    - PDFs: PyMuPDF (primary) -> PyPDF2 (fallback) -> OCR (for scanned PDFs)
+    - Images: pytesseract + Pillow (with preprocessing)
     - Fallback: read as UTF-8 text (best-effort)
 
     Returns (text, meta) where meta contains method and any warnings.
@@ -25,39 +94,75 @@ def extract_text(file_path: str) -> Tuple[str, Dict[str, str]]:
     method = "unknown"
     warnings = []
     text = ""
+    text_chunks = []
 
     if _is_pdf(file_path):
+        # Try PyMuPDF first (better extraction and OCR support)
         try:
-            import PyPDF2  # type: ignore
-        except Exception as e:  # pragma: no cover
-            warnings.append(f"PyPDF2 not available: {e}")
-        else:
-            method = "pdf-pypdf2"
+            import fitz  # PyMuPDF  # type: ignore
+            method = "pdf-pymupdf"
             try:
-                with open(file_path, "rb") as f:
-                    reader = PyPDF2.PdfReader(f)
-                    for page in reader.pages:
-                        try:
-                            text += page.extract_text() or ""
-                        except Exception:
-                            # Some pages may fail extraction
-                            continue
+                with fitz.open(file_path) as doc:
+                    for page in doc:
+                        page_text = page.get_text("text") or ""
+                        if page_text.strip():
+                            text_chunks.append(page_text)
+                    
+                    # If no text extracted, fallback to OCR for scanned PDFs
+                    if not text_chunks:
+                        logger.info(f"No digital text found in {file_path}. Falling back to OCR.")
+                        method = "pdf-pymupdf-ocr"
+                        for page_num, page in enumerate(doc):
+                            try:
+                                # Render page to image at higher DPI for better OCR
+                                pix = page.get_pixmap(dpi=220)
+                                img_bytes = pix.tobytes("png")
+                                from PIL import Image  # type: ignore
+                                pil_img = Image.open(io.BytesIO(img_bytes))
+                                ocr_text = _ocr_image_pil(pil_img)
+                                if ocr_text:
+                                    text_chunks.append(ocr_text)
+                            except Exception as e:
+                                warnings.append(f"OCR failed for page {page_num + 1}: {e}")
+                                continue
             except Exception as e:
-                warnings.append(f"PDF extraction failed: {e}")
+                warnings.append(f"PyMuPDF extraction failed: {e}")
+                method = "pdf-pymupdf-failed"
+        except ImportError:
+            # Fallback to PyPDF2 if PyMuPDF not available
+            try:
+                import PyPDF2  # type: ignore
+                method = "pdf-pypdf2"
+                try:
+                    with open(file_path, "rb") as f:
+                        reader = PyPDF2.PdfReader(f)
+                        for page in reader.pages:
+                            try:
+                                page_text = page.extract_text() or ""
+                                if page_text.strip():
+                                    text_chunks.append(page_text)
+                            except Exception:
+                                continue
+                except Exception as e:
+                    warnings.append(f"PyPDF2 extraction failed: {e}")
+            except ImportError:
+                warnings.append("Neither PyMuPDF nor PyPDF2 available for PDF extraction")
 
     elif _is_image(file_path):
         try:
             from PIL import Image  # type: ignore
-            import pytesseract  # type: ignore
-        except Exception as e:  # pragma: no cover
-            warnings.append(f"Image OCR deps missing: {e}")
-        else:
             method = "image-pytesseract"
             try:
                 img = Image.open(file_path)
-                text = pytesseract.image_to_string(img)
+                text = _ocr_image_pil(img)
             except Exception as e:
                 warnings.append(f"Image OCR failed: {e}")
+        except ImportError as e:
+            warnings.append(f"Image OCR deps missing: {e}")
+
+    # Combine text chunks from PDF pages
+    if text_chunks:
+        text = "\n".join(text_chunks)
 
     # Fallback if nothing extracted
     if not text:

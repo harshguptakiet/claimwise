@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 PyPDF2
+PyMuPDF
 Pillow
 pytesseract
 jsonschema
