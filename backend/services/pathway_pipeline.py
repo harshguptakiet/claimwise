@@ -18,6 +18,14 @@ except ImportError:
     HAS_PATHWAY = False
     logger.warning("Pathway not installed. Install with: pip install pathway")
 
+# Optional schemas (only available when Pathway is installed)
+try:
+    from .pathway_schemas import ClaimSchema, RuleSchema, RoutedSchema  # type: ignore
+except Exception:
+    ClaimSchema = None  # type: ignore
+    RuleSchema = None  # type: ignore
+    RoutedSchema = None  # type: ignore
+
 
 class PathwayClaimPipeline:
     """
@@ -31,29 +39,45 @@ class PathwayClaimPipeline:
     def __init__(self):
         if not HAS_PATHWAY:
             raise ImportError("Pathway is required. Install with: pip install pathway")
-        
+
         # Thread-safe storage for rules (will feed into Pathway)
-        self._rules_store: deque = deque()
+        self._rules_store = deque()
         self._rules_lock = threading.Lock()
         self._rules_version = 0
-        
+
         # Initialize Pathway components
         self._init_pathway_tables()
         self._build_pipeline()
-        
+
         logger.info("Pathway claim processing pipeline initialized")
     
     def _init_pathway_tables(self):
         """Initialize Pathway tables and data structures"""
-        self.claims_table = None  # Will be created dynamically if needed
-        self.rules_table = None   # Will be created dynamically if needed
+        self.claims_table = None  # Will be created dynamically if Pathway present
+        self.rules_table = None   # Will be created dynamically if Pathway present
         self.routed_output = None
+        # Guarded references to connectors
+        self._py_reader = None
+        self._py_writer = None
+        # Lightweight ingestion logs for observability/debugging even without Pathway graph
+        self._claims_ingest_log = deque(maxlen=200)
+        self._results_log = deque(maxlen=200)
     
     def _build_pipeline(self):
         """Build the reactive Pathway pipeline"""
-        # Pipeline structure will be built when data is available
-        # This is a placeholder - actual pipeline will be constructed with real data
-        pass
+        # Build a minimal structure only when Pathway is installed. We keep this
+        # lazy and non-binding so the app works even when Pathway isn't installed.
+        try:
+            if HAS_PATHWAY and ClaimSchema and RuleSchema:
+                # Guarded access to python connectors (may vary by version)
+                self._py_reader = getattr(getattr(pw, "io", object()), "python", None)
+                # No-op writer for now; placeholder if needed later
+                self._py_writer = getattr(getattr(pw, "io", object()), "python", None)
+                # We defer creating tables until ingestion to keep the graph lazy.
+                # This keeps the app robust even if Pathway is missing or versions differ.
+                pass
+        except Exception as e:
+            logger.warning(f"Non-fatal: failed to build Pathway graph: {e}")
     
     def process_claim(self, claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -70,7 +94,9 @@ class PathwayClaimPipeline:
             "claim_category": ml_scores.get("claim_category", "accident"),
             "insurance_type": ml_scores.get("insurance_type", "vehicle"),
             "timestamp": datetime.now().isoformat(),
-            "analysis_json": json.dumps(claim_data.get("analysis", {})),
+            "analysis_json": json.dumps(
+                claim_data.get("analysis") or claim_data.get("analyses") or {}
+            ),
         }
         
         # Categorize scores
@@ -96,6 +122,51 @@ class PathwayClaimPipeline:
             "complexity_category": comp_cat,
             "rules_version": rules_version,
         }
+
+    # --- Ingestion helpers -------------------------------------------------
+    def ingest_claim(self, claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Dict[str, Any]:
+        """Ingest a claim and return routing result.
+        If Pathway is installed, this also logs to ingestion buffers; if a full
+        graph is present it could push to the Pathway tables.
+        """
+        result = self.process_claim(claim_data, ml_scores)
+        # Demonstrate connector usage: create transient tables from Python data
+        try:
+            if HAS_PATHWAY and self._py_reader and hasattr(self._py_reader, "read") and ClaimSchema and RuleSchema:
+                # Create small one-shot tables for tracing/debugging.
+                self.claims_table = self._py_reader.read([{
+                    "claim_id": result.get("claim_id"),
+                    "claim_number": result.get("claim_number"),
+                    "fraud_score": result.get("fraud_score", 0.0),
+                    "complexity_score": result.get("complexity_score", 1.0),
+                    "severity_level": result.get("severity_level", "Low"),
+                    "claim_category": result.get("claim_category", "accident"),
+                    "insurance_type": result.get("insurance_type", "vehicle"),
+                    "timestamp": result.get("timestamp"),
+                    "analysis_json": result.get("analysis_json", "{}"),
+                }], schema=ClaimSchema)
+
+                with self._rules_lock:
+                    rules_snapshot = list(self._rules_store)
+                self.rules_table = self._py_reader.read(rules_snapshot, schema=RuleSchema)
+        except Exception as e:
+            # Non-fatal: connector differences across versions may trigger errors
+            logger.debug(f"Skipping connector demo due to: {e}")
+        # Store last ingested items for visibility
+        try:
+            self._claims_ingest_log.append({
+                "claim_number": result.get("claim_number"),
+                "ingested_at": datetime.now().isoformat(),
+            })
+            self._results_log.append({
+                "claim_number": result.get("claim_number"),
+                "routing_team": result.get("routing_team"),
+                "adjuster": result.get("adjuster"),
+                "processed_at": datetime.now().isoformat(),
+            })
+        except Exception:
+            pass
+        return result
     
     def _apply_pathway_routing(
         self, claim: Dict, fraud_cat: str, sev_cat: str, comp_cat: str, rules: List[Dict]
@@ -210,6 +281,11 @@ class PathwayClaimPipeline:
         logger.info(f"Updated {len(rules)} routing rules (version {self._rules_version})")
         # In a full Pathway implementation, this would trigger automatic rerouting
         # of all affected claims in the pipeline
+
+    def ingest_rules(self, rules: List[Dict]) -> int:
+        """Alias for update_rules for ingestion semantics. Returns new version."""
+        self.update_rules(rules)
+        return self.get_rules_version()
     
     def reroute_claims(self, claims: List[Dict]) -> List[Dict]:
         """
@@ -273,6 +349,18 @@ class PathwayClaimPipeline:
         with self._rules_lock:
             return self._rules_version
 
+    def get_status(self) -> Dict[str, Any]:
+        """Return a lightweight status snapshot for monitoring."""
+        with self._rules_lock:
+            rules_version = self._rules_version
+            rules_count = len(self._rules_store)
+        return {
+            "rules_version": rules_version,
+            "rules_count": rules_count,
+            "recent_ingested": list(self._claims_ingest_log),
+            "recent_results": list(self._results_log),
+        }
+
 
 # Global Pathway pipeline instance
 _pathway_pipeline: Optional[PathwayClaimPipeline] = None
@@ -295,3 +383,16 @@ def get_pathway_pipeline() -> Optional[PathwayClaimPipeline]:
             return None
     
     return _pathway_pipeline
+
+# Convenience top-level helpers so callers don't need to manage the instance
+def pathway_ingest_and_route_claim(claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    pipeline = get_pathway_pipeline()
+    if not pipeline:
+        return None
+    return pipeline.ingest_claim(claim_data, ml_scores)
+
+def pathway_ingest_rules(rules: List[Dict]) -> Optional[int]:
+    pipeline = get_pathway_pipeline()
+    if not pipeline:
+        return None
+    return pipeline.ingest_rules(rules)
