@@ -287,8 +287,8 @@ def score_claim_multi_file(
         severity_level = feats.get('severity_level', 'Low')
         complexity_score = float(feats.get('complexity_score', 1.0))
         
-        # Run triage for routing
-        texts_tuple = (acord_text, fir_text, loss_text)
+        # Run triage for routing - use full text if available
+        texts_tuple = (acord_full_text, fir_full_text, loss_full_text)
         
         triage_result = triage_agent(acord_dict, police_dict, loss_dict, feats, texts_tuple)
         
@@ -303,8 +303,10 @@ def score_claim_multi_file(
             "adjuster": triage_result.get("adjuster", "Standard Adjuster"),
             "litigation_flag": triage_result.get("litigation_flag", False),
             "litigation_score": triage_result.get("litigation_score", 0.0),
+            "litigation_reasons": triage_result.get("litigation_reasons", []),
             "subrogation_flag": triage_result.get("subrogation_flag", False),
             "subrogation_score": triage_result.get("subrogation_score", 0.0),
+            "subrogation_reasons": triage_result.get("subrogation_reasons", []),
             "routing_reasons": triage_result.get("reasons", []),
             "features": feats,
         }
@@ -424,8 +426,10 @@ def score_claim(analysis: Dict, file_path: Optional[str] = None) -> Dict[str, An
             "adjuster": triage_result.get("adjuster", "Standard Adjuster"),
             "litigation_flag": triage_result.get("litigation_flag", False),
             "litigation_score": triage_result.get("litigation_score", 0.0),
+            "litigation_reasons": triage_result.get("litigation_reasons", []),
             "subrogation_flag": triage_result.get("subrogation_flag", False),
             "subrogation_score": triage_result.get("subrogation_score", 0.0),
+            "subrogation_reasons": triage_result.get("subrogation_reasons", []),
             "routing_reasons": triage_result.get("reasons", []),
             "features": feats,
         }

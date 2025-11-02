@@ -1,34 +1,270 @@
 [
   {
-    "id": "CLM-1762052009715",
-    "claim_number": "CLM-1762052009715",
-    "claimant": "kv",
-    "policy_no": "CLM-1762052009715",
+    "id": "CLM-1762059821574",
+    "claim_number": "CLM-1762059821574",
+    "claimant": "verma",
+    "policy_no": "CLM-1762059821574",
     "loss_type": "medical",
     "claim_type": "medical",
-    "created_at": "2025-11-02T02:53:30.220681Z",
-    "severity": "Low",
-    "severity_level": "Low",
-    "confidence": 0.6639999999999999,
+    "created_at": "2025-11-02T05:03:42.514155Z",
+    "severity": "Medium",
+    "severity_level": "Medium",
+    "confidence": 0.838,
     "queue": "Health Dept - Mid",
     "routing_team": "Health Dept - Mid",
     "final_team": "Health Dept - Mid",
     "status": "Processing",
-    "email": "kanak.2428csit2245@kiet.edu",
+    "email": "kanak@gmail.com",
     "description": "",
     "rationale": "",
     "evidence": [],
-    "attachments": {
-      "acord": "/files/CLM-1762052009715_acord.pdf",
-      "loss": "/files/CLM-1762052009715_loss.pdf",
-      "hospital": "/files/CLM-1762052009715_hospital.pdf"
-    },
+    "ai_analysis": {},
+    "sources": [],
+    "attachments": [
+      {
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762059821574_acord.pdf",
+        "type": "acord"
+      },
+      {
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762059821574_loss.pdf",
+        "type": "loss"
+      },
+      {
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762059821574_hospital.pdf",
+        "type": "hospital"
+      }
+    ],
     "assignee": "Standard Adjuster",
     "adjuster": "Standard Adjuster",
     "ml_scores": {
-      "fraud_score": 0.336,
-      "complexity_score": 3.0,
-      "severity_level": "Low",
+      "fraud_score": 0.162,
+      "complexity_score": 2.0,
+      "severity_level": "Medium",
+      "fraud_label": 0,
+      "claim_category": "health",
+      "litigation_score": 0.25,
+      "litigation_flag": false,
+      "litigation_reasons": [
+        "Injuries reported"
+      ],
+      "subrogation_score": 0.25,
+      "subrogation_flag": false,
+      "subrogation_reasons": [
+        "Significant damage, consistent"
+      ]
+    },
+    "routing": {
+      "routing_team": "Health Dept - Mid",
+      "adjuster": "Standard Adjuster",
+      "routing_reasons": [
+        "Complexity score is 2.0 and Severity score is Medium so routed to this team"
+      ],
+      "routing_reason": "Complexity score is 2.0 and Severity score is Medium so routed to this team",
+      "rule_applied": true,
+      "matched_rule_id": null,
+      "rules_version": 1,
+      "pathway_processed": true
+    },
+    "fraud_score": 0.162,
+    "complexity_score": 2.0
+  },
+  {
+    "id": "CLM-1762057578030",
+    "claim_number": "CLM-1762057578030",
+    "claimant": "kanakverma",
+    "policy_no": "CLM-1762057578030",
+    "loss_type": "medical",
+    "claim_type": "medical",
+    "created_at": "2025-11-02T04:26:18.886706Z",
+    "severity": "Medium",
+    "severity_level": "Medium",
+    "confidence": 0.862,
+    "queue": "Health Dept - High",
+    "routing_team": "Health Dept - High",
+    "final_team": "Health Dept - High",
+    "status": "Processing",
+    "email": "kanak@gmail.com",
+    "description": "==================================================\nACORD DOCUMENT\n==================================================\n  • Claim Id: CLM-2025-01-0001-HEA\n  • Policy Number: POL-400001\n  • Insurance Start Date: 2024-10-04\n  • Insurance Expiry Date: 2026-03-30\n  • Incident Type: Outpatient care\n  • Incident Date: 2025-07-28\n  • Patient Id: PID-708406\n\n  • Location: Bhopal\n  • Hospital Code: HOSP-9051\n  • Injuries Reported: True\n  • Diagnosis: Fracture\n  • Hospital: Code: HOSP-9051\n\n==================================================\nLOSS DOCUMENT\n==================================================\n  • Claim Id: CLM-2025-0001-HEA\n  • Inspection Date: 2025-07-31\n  • Loss Date: 2025-07-28\n  • Claim Status: Approved\n\n  • Inspection Location: Bhopal Center\n  • Injuries Reported: True\n  • Medical Notes: Recovery ongoing\n\n==================================================\nHOSPITAL DOCUMENT\n==================================================\n  • Claim Id: CLM-2025-0001-HEA\n  • Patient Id: PID-708406\n  • Admission Date: 2025-07-28\n  • Discharge Date: 2025-07-29\n\n  • Hospital Code: HOSP-9051\n  • Prescription: Ibuprofen 400mg, after meals",
+    "rationale": "This claim has been assessed with a fraud risk score of 13.8%.\nThe complexity score is 2.0, indicating a medium complexity case.\nSeverity level is assessed as Medium.\n\nRisk factors identified:\n- Vehicle registration mismatch\n\nBased on this analysis, the claim has been routed to Health Dept - Mid team.\nRouting reasons:\n- Complexity score is 2.0 and Severity score is Medium so routed to this team",
+    "evidence": [
+      {
+        "source": "ACORD Document",
+        "type": "acord",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-01-0001-HEA"
+          },
+          {
+            "field": "Policy Number",
+            "value": "POL-400001"
+          },
+          {
+            "field": "Insurance Start Date",
+            "value": "2024-10-04"
+          },
+          {
+            "field": "Insurance Expiry Date",
+            "value": "2026-03-30"
+          },
+          {
+            "field": "Incident Type",
+            "value": "Outpatient care"
+          },
+          {
+            "field": "Incident Date",
+            "value": "2025-07-28"
+          },
+          {
+            "field": "Location",
+            "value": "Bhopal"
+          },
+          {
+            "field": "Patient Id",
+            "value": "PID-708406"
+          },
+          {
+            "field": "Hospital Code",
+            "value": "HOSP-9051"
+          },
+          {
+            "field": "Injuries Reported",
+            "value": "True"
+          },
+          {
+            "field": "Diagnosis",
+            "value": "Fracture"
+          },
+          {
+            "field": "Hospital",
+            "value": "Code: HOSP-9051"
+          }
+        ]
+      },
+      {
+        "source": "LOSS Document",
+        "type": "loss",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-0001-HEA"
+          },
+          {
+            "field": "Inspection Date",
+            "value": "2025-07-31"
+          },
+          {
+            "field": "Loss Date",
+            "value": "2025-07-28"
+          },
+          {
+            "field": "Inspection Location",
+            "value": "Bhopal Center"
+          },
+          {
+            "field": "Injuries Reported",
+            "value": "True"
+          },
+          {
+            "field": "Claim Status",
+            "value": "Approved"
+          },
+          {
+            "field": "Medical Notes",
+            "value": "Recovery ongoing"
+          }
+        ]
+      },
+      {
+        "source": "HOSPITAL Document",
+        "type": "hospital",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-0001-HEA"
+          },
+          {
+            "field": "Patient Id",
+            "value": "PID-708406"
+          },
+          {
+            "field": "Hospital Code",
+            "value": "HOSP-9051"
+          },
+          {
+            "field": "Prescription",
+            "value": "Ibuprofen 400mg, after meals"
+          },
+          {
+            "field": "Admission Date",
+            "value": "2025-07-28"
+          },
+          {
+            "field": "Discharge Date",
+            "value": "2025-07-29"
+          }
+        ]
+      }
+    ],
+    "ai_analysis": {
+      "fraud_risk": "Low",
+      "fraud_score": 0.138,
+      "complexity_assessment": "Medium",
+      "complexity_score": 2.0,
+      "severity_level": "Medium",
+      "risk_factors": [
+        "Vehicle registration mismatch"
+      ]
+    },
+    "sources": [
+      {
+        "document_type": "acord",
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762057578030_acord.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      },
+      {
+        "document_type": "loss",
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762057578030_loss.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      },
+      {
+        "document_type": "hospital",
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762057578030_hospital.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762057578030_acord.pdf",
+        "type": "acord"
+      },
+      {
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762057578030_loss.pdf",
+        "type": "loss"
+      },
+      {
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762057578030_hospital.pdf",
+        "type": "hospital"
+      }
+    ],
+    "assignee": "Senior Adjuster",
+    "adjuster": "Senior Adjuster",
+    "ml_scores": {
+      "fraud_score": 0.138,
+      "complexity_score": 2.0,
+      "severity_level": "Medium",
       "fraud_label": 0,
       "claim_category": "health"
     },
@@ -36,161 +272,230 @@
       "routing_team": "Health Dept - Mid",
       "adjuster": "Standard Adjuster",
       "routing_reasons": [
-        "Complexity score is 3.0 and Severity score is Low so routed to this team"
+        "Complexity score is 2.0 and Severity score is Medium so routed to this team"
       ],
-      "routing_reason": "Complexity score is 3.0 and Severity score is Low so routed to this team",
+      "routing_reason": "Complexity score is 2.0 and Severity score is Medium so routed to this team",
       "rule_applied": true,
       "matched_rule_id": null,
       "rules_version": 1,
       "pathway_processed": true
     },
-    "fraud_score": 0.336,
-    "complexity_score": 3.0
+    "fraud_score": 0.138,
+    "complexity_score": 2.0,
+    "history": [
+      {
+        "type": "reassign",
+        "queue": "Health Dept - High",
+        "assignee": "Senior Adjuster",
+        "note": "",
+        "at": "2025-11-02T04:27:01.297941Z"
+      }
+    ]
   },
   {
-    "id": "CLM-1762051670104",
-    "claim_number": "CLM-1762051670104",
+    "id": "CLM-1762057321594",
+    "claim_number": "CLM-1762057321594",
     "claimant": "kanak",
-    "policy_no": "CLM-1762051670104",
-    "loss_type": "accident",
-    "claim_type": "accident",
-    "created_at": "2025-11-02T02:47:50.896651Z",
+    "policy_no": "CLM-1762057321594",
+    "loss_type": "medical",
+    "claim_type": "medical",
+    "created_at": "2025-11-02T04:22:02.611080Z",
     "severity": "Low",
     "severity_level": "Low",
-    "confidence": 0.808,
-    "queue": "Fast Track",
-    "routing_team": "Fast Track",
-    "final_team": "Fast Track",
+    "confidence": 1.0,
+    "queue": "Accident Dept - Low",
+    "routing_team": "Accident Dept - Low",
+    "final_team": "Accident Dept - Low",
     "status": "Processing",
-    "email": "mayanksrivastava11111@gmail.com",
-    "description": "",
-    "rationale": "",
-    "evidence": [],
-    "attachments": {
-      "acord": "/files/CLM-1762051670104_acord.pdf",
-      "loss": "/files/CLM-1762051670104_loss.pdf",
-      "fir": "/files/CLM-1762051670104_fir.pdf",
-      "rc": "/files/CLM-1762051670104_rc.pdf",
-      "dl": "/files/CLM-1762051670104_dl.pdf"
+    "email": "verma@gmail.com",
+    "description": "Extracted Document Data:\n\nACORD Document:\n  - Claim Id: CLM-2025-01-0088-HEA\n  - Policy Number: POL-400088\n  - Insurance Start Date: 2024-03-20\n  - Insurance Expiry Date: 2025-04-28\n  - Incident Type: Hospitalization\n  - Incident Date: 2025-03-11\n  - Location: Nagpur\n  - Patient Id: PID-982726\n  - Hospital Code: HOSP-1000\n  - Injuries Reported: True\n  - Diagnosis: Fracture\n  - Hospital: Code: HOSP-1000\n\nLOSS Document:\n  - Claim Id: CLM-2025-0088-HEA\n  - Inspection Date: 2025-03-21\n  - Loss Date: 2025-03-26\n  - Inspection Location: Delhi Center\n  - Claim Status: Under Review\n  - Medical Notes: Recovery ongoing\n\nHOSPITAL Document:\n  - Claim Id: CLM-2025-0088-HEA\n  - Patient Id: PID-982726\n  - Hospital Code: HOSP-1000\n  - Prescription: Paracetamol 500mg, 2x daily\n  - Admission Date: 2025-03-12\n  - Discharge Date: 2025-03-14",
+    "rationale": "This claim has been assessed with a fraud risk score of 0.0%.\nThe complexity score is 1.0, indicating a low complexity case.\nSeverity level is assessed as Low.\n\nBased on this analysis, the claim has been routed to Accident Dept - Low team.\nRouting reasons:\n- Complexity score is 1.0 and Severity score is Low so routed to this team",
+    "evidence": [
+      {
+        "source": "ACORD Document",
+        "type": "acord",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-01-0088-HEA"
+          },
+          {
+            "field": "Policy Number",
+            "value": "POL-400088"
+          },
+          {
+            "field": "Insurance Start Date",
+            "value": "2024-03-20"
+          },
+          {
+            "field": "Insurance Expiry Date",
+            "value": "2025-04-28"
+          },
+          {
+            "field": "Incident Type",
+            "value": "Hospitalization"
+          },
+          {
+            "field": "Incident Date",
+            "value": "2025-03-11"
+          },
+          {
+            "field": "Location",
+            "value": "Nagpur"
+          },
+          {
+            "field": "Patient Id",
+            "value": "PID-982726"
+          },
+          {
+            "field": "Hospital Code",
+            "value": "HOSP-1000"
+          },
+          {
+            "field": "Injuries Reported",
+            "value": "True"
+          },
+          {
+            "field": "Diagnosis",
+            "value": "Fracture"
+          },
+          {
+            "field": "Hospital",
+            "value": "Code: HOSP-1000"
+          }
+        ]
+      },
+      {
+        "source": "LOSS Document",
+        "type": "loss",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-0088-HEA"
+          },
+          {
+            "field": "Inspection Date",
+            "value": "2025-03-21"
+          },
+          {
+            "field": "Loss Date",
+            "value": "2025-03-26"
+          },
+          {
+            "field": "Inspection Location",
+            "value": "Delhi Center"
+          },
+          {
+            "field": "Claim Status",
+            "value": "Under Review"
+          },
+          {
+            "field": "Medical Notes",
+            "value": "Recovery ongoing"
+          }
+        ]
+      },
+      {
+        "source": "HOSPITAL Document",
+        "type": "hospital",
+        "fields": [
+          {
+            "field": "Claim Id",
+            "value": "CLM-2025-0088-HEA"
+          },
+          {
+            "field": "Patient Id",
+            "value": "PID-982726"
+          },
+          {
+            "field": "Hospital Code",
+            "value": "HOSP-1000"
+          },
+          {
+            "field": "Prescription",
+            "value": "Paracetamol 500mg, 2x daily"
+          },
+          {
+            "field": "Admission Date",
+            "value": "2025-03-12"
+          },
+          {
+            "field": "Discharge Date",
+            "value": "2025-03-14"
+          }
+        ]
+      }
+    ],
+    "ai_analysis": {
+      "fraud_risk": "Low",
+      "fraud_score": 0.0,
+      "complexity_assessment": "Low",
+      "complexity_score": 1.0,
+      "severity_level": "Low",
+      "risk_factors": []
     },
-    "assignee": "Standard Adjuster",
-    "adjuster": "Standard Adjuster",
+    "sources": [
+      {
+        "document_type": "acord",
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762057321594_acord.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      },
+      {
+        "document_type": "loss",
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762057321594_loss.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      },
+      {
+        "document_type": "hospital",
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762057321594_hospital.pdf",
+        "source": "Uploaded PDF Document",
+        "extraction_status": "Completed"
+      }
+    ],
+    "attachments": [
+      {
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762057321594_acord.pdf",
+        "type": "acord"
+      },
+      {
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762057321594_loss.pdf",
+        "type": "loss"
+      },
+      {
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762057321594_hospital.pdf",
+        "type": "hospital"
+      }
+    ],
+    "assignee": "Junior Adjuster",
+    "adjuster": "Junior Adjuster",
     "ml_scores": {
-      "fraud_score": 0.192,
+      "fraud_score": 0.0,
       "complexity_score": 1.0,
       "severity_level": "Low",
       "fraud_label": 0,
-      "claim_category": "accident"
+      "claim_category": "medical"
     },
     "routing": {
-      "routing_team": "Fast Track",
-      "adjuster": "Standard Adjuster",
+      "routing_team": "Accident Dept - Low",
+      "adjuster": "Junior Adjuster",
       "routing_reasons": [
-        "Low Risk - Default"
+        "Complexity score is 1.0 and Severity score is Low so routed to this team"
       ],
+      "routing_reason": "Complexity score is 1.0 and Severity score is Low so routed to this team",
       "rule_applied": true,
-      "matched_rule_id": "ccad7ad9-372c-4df8-a0f5-cb5585ac1aff",
-      "routing_reason": "Low Risk - Default",
+      "matched_rule_id": null,
       "rules_version": 1,
       "pathway_processed": true
     },
-    "fraud_score": 0.192,
+    "fraud_score": 0.0,
     "complexity_score": 1.0
-  },
-  {
-    "id": "CLM-1762049144121",
-    "claim_number": "CLM-1762049144121",
-    "claimant": "Menu_Punjabi",
-    "policy_no": "CLM-1762049144121",
-    "loss_type": "medical",
-    "claim_type": "medical",
-    "created_at": "2025-11-02T02:05:44.514235Z",
-    "severity": "Low",
-    "severity_level": "Low",
-    "confidence": 0.8009999999999999,
-    "queue": "Fast Track",
-    "routing_team": "Fast Track",
-    "final_team": "Fast Track",
-    "status": "Processing",
-    "email": "mayanksrivastava111@gmail.com",
-    "description": "",
-    "rationale": "",
-    "evidence": [],
-    "attachments": {
-      "acord": "/files/CLM-1762049144121_acord.pdf",
-      "loss": "/files/CLM-1762049144121_loss.pdf",
-      "hospital": "/files/CLM-1762049144121_hospital.pdf"
-    },
-    "assignee": "Standard Adjuster",
-    "adjuster": "Standard Adjuster",
-    "ml_scores": {
-      "fraud_score": 0.199,
-      "complexity_score": 3.0,
-      "severity_level": "Low",
-      "fraud_label": 0,
-      "claim_category": "health"
-    },
-    "routing": {
-      "routing_team": "Fast Track",
-      "adjuster": "Standard Adjuster",
-      "routing_reasons": [
-        "Low Risk - Default"
-      ],
-      "rule_applied": true,
-      "matched_rule_id": "ccad7ad9-372c-4df8-a0f5-cb5585ac1aff",
-      "routing_reason": "Low Risk - Default",
-      "rules_version": 1,
-      "pathway_processed": true
-    },
-    "fraud_score": 0.199,
-    "complexity_score": 3.0
-  },
-  {
-    "id": "CLM-1762049004886",
-    "claim_number": "CLM-1762049004886",
-    "claimant": "Mayank Srivastava",
-    "policy_no": "CLM-1762049004886",
-    "loss_type": "medical",
-    "claim_type": "medical",
-    "created_at": "2025-11-02T02:03:25.546020Z",
-    "severity": "Low",
-    "severity_level": "Low",
-    "confidence": 0.8160000000000001,
-    "queue": "Fast Track",
-    "routing_team": "Fast Track",
-    "final_team": "Fast Track",
-    "status": "Processing",
-    "email": "mayanksrivastava11111@gmail.com",
-    "description": "",
-    "rationale": "",
-    "evidence": [],
-    "attachments": {
-      "acord": "/files/CLM-1762049004886_acord.pdf",
-      "loss": "/files/CLM-1762049004886_loss.pdf",
-      "hospital": "/files/CLM-1762049004886_hospital.pdf"
-    },
-    "assignee": "Standard Adjuster",
-    "adjuster": "Standard Adjuster",
-    "ml_scores": {
-      "fraud_score": 0.184,
-      "complexity_score": 2.0,
-      "severity_level": "Low",
-      "fraud_label": 0,
-      "claim_category": "health"
-    },
-    "routing": {
-      "routing_team": "Fast Track",
-      "adjuster": "Standard Adjuster",
-      "routing_reasons": [
-        "Low Risk - Default"
-      ],
-      "rule_applied": true,
-      "matched_rule_id": "ccad7ad9-372c-4df8-a0f5-cb5585ac1aff",
-      "routing_reason": "Low Risk - Default",
-      "rules_version": 1,
-      "pathway_processed": true
-    },
-    "fraud_score": 0.184,
-    "complexity_score": 2.0
   }
 ]

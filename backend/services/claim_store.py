@@ -67,6 +67,8 @@ def add_claim(record: Dict[str, Any]) -> Dict[str, Any]:
             "description": record.get("description") or "",
             "rationale": record.get("rationale") or "",
             "evidence": record.get("evidence") or [],
+            "ai_analysis": record.get("ai_analysis") or {},
+            "sources": record.get("sources") or [],
             "attachments": (
                 record.get("attachments") if isinstance(record.get("attachments"), list) else
                 ([{"filename": k, "url": v} for k, v in record.get("files", {}).items()] 
@@ -158,6 +160,16 @@ def queues_summary() -> List[Dict[str, Any]]:
                 "averageProcessingTime": "--",
             })
         return result
+
+
+def clear_all_claims() -> int:
+    """Clear all claims from the store and return the count of deleted claims"""
+    global _claims
+    with _lock:
+        count = len(_claims)
+        _claims = []
+        _save()
+        return count
 
 
 # Load claims initially
