@@ -1,22 +1,22 @@
 # Frontend-Backend Integration Status
 
-## ✅ Integrated Features
+## Integrated Features
 
 ### 1. Routing Rules API
 - **Frontend**: `client/api/rules.ts`
 - **Backend**: `routers/routing.py`
-- **Status**: ✅ Connected
+- **Status**: Connected
 - **Endpoints**:
-  - GET `/routing/rules` - List all rules ✅
-  - POST `/routing/rules` - Create rule ✅
-  - PUT `/routing/rules/{id}` - Update rule ✅
-  - DELETE `/routing/rules/{id}` - Delete rule ✅
-  - GET `/routing/attributes` - Get attributes ✅
+  - GET `/routing/rules` - List all rules
+  - POST `/routing/rules` - Create rule
+  - PUT `/routing/rules/{id}` - Update rule
+  - DELETE `/routing/rules/{id}` - Delete rule
+  - GET `/routing/attributes` - Get attributes
 
 ### 2. File Upload
 - **Frontend**: `client/pages/UploadPage.tsx` → `client/api/claims.ts`
 - **Backend**: `routers/upload.py`
-- **Status**: ✅ Connected (updated)
+- **Status**: Connected (updated)
 - **Endpoint**: POST `/upload`
 - **Format**: `claim_number` (Form field) + `file` (File)
 
@@ -25,21 +25,21 @@
 - **Base URL**: `http://localhost:8000` (default)
 - **Configurable**: Via `VITE_API_BASE_URL` environment variable
 
-## ⚠️ Integration Issues Fixed
+## Integration Issues Fixed
 
-### 1. Upload Endpoint Mismatch ✅ FIXED
+### 1. Upload Endpoint Mismatch (FIXED)
 - **Was**: Frontend calling `/api/claims/upload`
 - **Now**: Frontend calls `/upload` (matches backend)
 
-### 2. Rules Attributes Endpoint ✅ FIXED
+### 2. Rules Attributes Endpoint (FIXED)
 - **Was**: Frontend calling `/api/rules/attributes`
 - **Now**: Frontend calls `/routing/attributes` (matches backend)
 
-### 3. Upload Data Format ✅ FIXED
+### 3. Upload Data Format (FIXED)
 - **Backend expects**: `claim_number` + `file`
 - **Frontend now sends**: `claim_number` (generated) + `file` (first ACORD file)
 
-## 📝 Data Structure Mismatches
+## Data Structure Mismatches
 
 ### Rules API Structure
 
@@ -56,18 +56,18 @@
 **Backend expects**:
 ```python
 {
-  condition_type: str,      # "fraud", "severity", "complexity", etc.
-  condition_value: str,      # "low", "mid", "high"
-  claim_type: str,           # "accident", "health", or null
-  routing_team: str,           # "SIU (Fraud)", "Fast Track", etc.
-  adjuster: str,             # Team adjuster name
-  operator: str,             # For fraud_threshold: ">=", ">", etc.
-  threshold: float,          # For fraud_threshold
-  priority: int              # Rule priority
+  condition_type: str,
+  condition_value: str,
+  claim_type: str,
+  routing_team: str,
+  adjuster: str,
+  operator: str,
+  threshold: float,
+  priority: int
 }
 ```
 
-**Status**: ⚠️ Frontend needs mapping layer or backend adapter
+**Status**: Frontend needs mapping layer or backend adapter
 
 ### Upload Response Structure
 
@@ -93,13 +93,13 @@
 **Frontend expects**:
 ```typescript
 {
-  id: string  // Claim ID
+  id: string
 }
 ```
 
-**Status**: ⚠️ Frontend should use `claim_number` from response
+**Status**: Frontend should use `claim_number` from response
 
-## 🔄 How to Use
+## How to Use
 
 ### 1. Start Backend
 ```bash
@@ -121,7 +121,7 @@ Create `frontend/.env`:
 VITE_API_BASE_URL=http://localhost:8000
 ```
 
-## 🎯 Current Integration Flow
+## Current Integration Flow
 
 ### Upload Flow
 1. User fills form in `UploadPage.tsx`
@@ -143,7 +143,7 @@ VITE_API_BASE_URL=http://localhost:8000
 6. Changes trigger backend rule updates
 7. Pathway pipeline automatically updates (if available)
 
-## 🔧 Remaining Work
+## Remaining Work
 
 ### 1. Rules Data Mapping
 Create an adapter to map frontend rule structure to backend structure, or update frontend to match backend schema.
@@ -157,17 +157,17 @@ Frontend expects `/api/claims/{id}` but backend doesn't have this endpoint yet. 
 ### 4. WebSocket Integration
 Frontend has WebSocket hooks (`useClaimsWebSocket.ts`) but backend doesn't have WebSocket endpoints yet.
 
-## ✅ What Works Now
+## What Works Now
 
-1. ✅ Upload single file with claim number
-2. ✅ Get ML scores and routing results
-3. ✅ List routing rules
-4. ✅ Create routing rules (with data mapping)
-5. ✅ Update routing rules
-6. ✅ Delete routing rules
-7. ✅ Get rule attributes
+1. Upload single file with claim number
+2. Get ML scores and routing results
+3. List routing rules
+4. Create routing rules (with data mapping)
+5. Update routing rules
+6. Delete routing rules
+7. Get rule attributes
 
-## 🚀 Testing Integration
+## Testing Integration
 
 ### Test Upload
 ```bash
@@ -178,14 +178,11 @@ curl -X POST "http://localhost:8000/upload" \
 
 ### Test Rules
 ```bash
-# List rules
 curl "http://localhost:8000/routing/rules"
-
-# Get attributes
 curl "http://localhost:8000/routing/attributes"
 ```
 
-## 📌 Notes
+## Notes
 
 - CORS is enabled on backend (allows all origins)
 - Frontend has fallback mock data if API fails

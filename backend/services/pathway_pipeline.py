@@ -1,7 +1,4 @@
-"""
-Complete Pathway-based claim processing pipeline
-Real-time, reactive routing with automatic updates when rules change
-"""
+"""Pathway-based claim processing and reactive routing."""
 import json
 import logging
 from typing import Dict, Any, List, Optional
@@ -18,7 +15,7 @@ except ImportError:
     HAS_PATHWAY = False
     logger.warning("Pathway not installed. Install with: pip install pathway")
 
-# Optional schemas (only available when Pathway is installed)
+# Optional schemas (imported when Pathway is installed)
 try:
     from .pathway_schemas import ClaimSchema, RuleSchema, RoutedSchema  # type: ignore
 except Exception:
@@ -28,63 +25,42 @@ except Exception:
 
 
 class PathwayClaimPipeline:
-    """
-    Complete Pathway pipeline for real-time claim processing and routing
-    Features:
-    - Reactive routing that updates automatically when rules change
-    - Real-time claim processing
-    - Automatic rerouting on rule changes
-    """
+    """Claim processing and routing pipeline (Pathway-backed when available)."""
     
     def __init__(self):
         if not HAS_PATHWAY:
             raise ImportError("Pathway is required. Install with: pip install pathway")
 
-        # Thread-safe storage for rules (will feed into Pathway)
         self._rules_store = deque()
         self._rules_lock = threading.Lock()
         self._rules_version = 0
 
-        # Initialize Pathway components
         self._init_pathway_tables()
         self._build_pipeline()
 
         logger.info("Pathway claim processing pipeline initialized")
     
     def _init_pathway_tables(self):
-        """Initialize Pathway tables and data structures"""
-        self.claims_table = None  # Will be created dynamically if Pathway present
-        self.rules_table = None   # Will be created dynamically if Pathway present
+        """Initialize internal tables/handles."""
+        self.claims_table = None
+        self.rules_table = None
         self.routed_output = None
-        # Guarded references to connectors
         self._py_reader = None
         self._py_writer = None
-        # Lightweight ingestion logs for observability/debugging even without Pathway graph
         self._claims_ingest_log = deque(maxlen=200)
         self._results_log = deque(maxlen=200)
     
     def _build_pipeline(self):
-        """Build the reactive Pathway pipeline"""
-        # Build a minimal structure only when Pathway is installed. We keep this
-        # lazy and non-binding so the app works even when Pathway isn't installed.
+        """Initialize Pathway IO handles if available."""
         try:
             if HAS_PATHWAY and ClaimSchema and RuleSchema:
-                # Guarded access to python connectors (may vary by version)
                 self._py_reader = getattr(getattr(pw, "io", object()), "python", None)
-                # No-op writer for now; placeholder if needed later
                 self._py_writer = getattr(getattr(pw, "io", object()), "python", None)
-                # We defer creating tables until ingestion to keep the graph lazy.
-                # This keeps the app robust even if Pathway is missing or versions differ.
-                pass
         except Exception as e:
             logger.warning(f"Non-fatal: failed to build Pathway graph: {e}")
     
     def process_claim(self, claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Process a claim through the Pathway pipeline
-        This simulates Pathway's reactive processing
-        """
-        # Prepare claim record
+        """Process a single claim and compute routing."""
         claim_record = {
             "claim_id": claim_data.get("claim_number", f"claim_{datetime.now().timestamp()}"),
             "claim_number": claim_data.get("claim_number", "unknown"),
@@ -99,17 +75,14 @@ class PathwayClaimPipeline:
             ),
         }
         
-        # Categorize scores
         fraud_cat = self._categorize_fraud(claim_record["fraud_score"])
         sev_cat = self._categorize_severity(claim_record["severity_level"])
         comp_cat = self._categorize_complexity(claim_record["complexity_score"])
         
-        # Get current rules
         with self._rules_lock:
             rules = list(self._rules_store)
             rules_version = self._rules_version
         
-        # Apply routing using Pathway-style reactive logic
         routing_result = self._apply_pathway_routing(
             claim_record, fraud_cat, sev_cat, comp_cat, rules
         )
@@ -123,17 +96,11 @@ class PathwayClaimPipeline:
             "rules_version": rules_version,
         }
 
-    # --- Ingestion helpers -------------------------------------------------
     def ingest_claim(self, claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Dict[str, Any]:
-        """Ingest a claim and return routing result.
-        If Pathway is installed, this also logs to ingestion buffers; if a full
-        graph is present it could push to the Pathway tables.
-        """
+        """Ingest a claim and return routing result."""
         result = self.process_claim(claim_data, ml_scores)
-        # Demonstrate connector usage: create transient tables from Python data
         try:
             if HAS_PATHWAY and self._py_reader and hasattr(self._py_reader, "read") and ClaimSchema and RuleSchema:
-                # Create small one-shot tables for tracing/debugging.
                 self.claims_table = self._py_reader.read([{
                     "claim_id": result.get("claim_id"),
                     "claim_number": result.get("claim_number"),
@@ -150,9 +117,7 @@ class PathwayClaimPipeline:
                     rules_snapshot = list(self._rules_store)
                 self.rules_table = self._py_reader.read(rules_snapshot, schema=RuleSchema)
         except Exception as e:
-            # Non-fatal: connector differences across versions may trigger errors
             logger.debug(f"Skipping connector demo due to: {e}")
-        # Store last ingested items for visibility
         try:
             self._claims_ingest_log.append({
                 "claim_number": result.get("claim_number"),
@@ -171,19 +136,15 @@ class PathwayClaimPipeline:
     def _apply_pathway_routing(
         self, claim: Dict, fraud_cat: str, sev_cat: str, comp_cat: str, rules: List[Dict]
     ) -> Dict:
-        """
-        Apply routing rules: First by claim type (Health/Accident), then by severity/complexity (Low/Mid/High)
-        """
+        """Apply routing rules to a claim."""
         claim_type = claim.get("claim_category", "accident")
         fraud_score = claim.get("fraud_score", 0.0)
         complexity_score = claim.get("complexity_score", 1.0)
         severity_level = claim.get("severity_level", "Low")
         
-        # Map claim type
         is_health = claim_type == "medical" or claim_type == "health"
         dept_name = "Health Dept" if is_health else "Accident Dept"
         
-        # Determine level based on severity and complexity
         if sev_cat == "high" or comp_cat == "high":
             level = "High"
         elif sev_cat == "mid" or comp_cat == "mid":
@@ -191,13 +152,11 @@ class PathwayClaimPipeline:
         else:
             level = "Low"
         
-        # Check for high fraud first (overrides everything)
         if fraud_score >= 0.6:
             routing_team = "SIU (Fraud)"
             adjuster = "SIU Investigator"
             routing_reason = f"Fraud score is {(fraud_score * 100):.1f}% so routed to this team"
         else:
-            # Route by department and level
             routing_team = f"{dept_name} - {level}"
             if level == "High":
                 adjuster = "Senior Adjuster"
@@ -205,8 +164,6 @@ class PathwayClaimPipeline:
                 adjuster = "Standard Adjuster"
             else:
                 adjuster = "Junior Adjuster"
-            
-            # Format routing reason
             routing_reason = f"Complexity score is {complexity_score:.1f} and Severity score is {severity_level} so routed to this team"
         
         return {
@@ -220,7 +177,7 @@ class PathwayClaimPipeline:
         self, rule: Dict, fraud_cat: str, sev_cat: str, comp_cat: str,
         claim_type: str, fraud_score: float
     ) -> bool:
-        """Match a rule condition (Pathway would do this reactively)"""
+        """Match a rule condition."""
         condition_type = rule.get("condition_type")
         
         if condition_type == "fraud":
@@ -266,10 +223,7 @@ class PathwayClaimPipeline:
         return False
     
     def update_rules(self, rules: List[Dict]):
-        """
-        Update routing rules - Pathway will automatically reroute affected claims
-        This is the reactive part: when rules change, routing updates automatically
-        """
+        """Replace rules and bump version."""
         with self._rules_lock:
             self._rules_store.clear()
             for rule in rules:
@@ -277,21 +231,15 @@ class PathwayClaimPipeline:
                 rule_copy["version"] = self._rules_version
                 self._rules_store.append(rule_copy)
             self._rules_version += 1
-        
         logger.info(f"Updated {len(rules)} routing rules (version {self._rules_version})")
-        # In a full Pathway implementation, this would trigger automatic rerouting
-        # of all affected claims in the pipeline
 
     def ingest_rules(self, rules: List[Dict]) -> int:
-        """Alias for update_rules for ingestion semantics. Returns new version."""
+        """Ingest rules and return the new version."""
         self.update_rules(rules)
         return self.get_rules_version()
     
     def reroute_claims(self, claims: List[Dict]) -> List[Dict]:
-        """
-        Reroute existing claims - demonstrates Pathway's reactive capabilities
-        When rules change, all affected claims are automatically rerouted
-        """
+        """Reroute a batch of claims using current rules."""
         with self._rules_lock:
             rules = list(self._rules_store)
         
@@ -318,7 +266,7 @@ class PathwayClaimPipeline:
         return rerouted
     
     def _categorize_fraud(self, score: float) -> str:
-        """Categorize fraud score"""
+        """Map fraud score to low/mid/high."""
         if score <= 0.33:
             return "low"
         elif score <= 0.67:
@@ -326,7 +274,7 @@ class PathwayClaimPipeline:
         return "high"
     
     def _categorize_severity(self, level: str) -> str:
-        """Categorize severity level"""
+        """Map severity text to low/mid/high."""
         if not level:
             return "low"
         level_lower = level.lower()
@@ -337,7 +285,7 @@ class PathwayClaimPipeline:
         return "low"
     
     def _categorize_complexity(self, score: float) -> str:
-        """Categorize complexity score"""
+        """Map complexity score to low/mid/high."""
         if score <= 2.0:
             return "low"
         elif score <= 3.5:
@@ -345,12 +293,12 @@ class PathwayClaimPipeline:
         return "high"
     
     def get_rules_version(self) -> int:
-        """Get current rules version for tracking changes"""
+        """Return current rules version."""
         with self._rules_lock:
             return self._rules_version
 
     def get_status(self) -> Dict[str, Any]:
-        """Return a lightweight status snapshot for monitoring."""
+        """Return a lightweight status snapshot."""
         with self._rules_lock:
             rules_version = self._rules_version
             rules_count = len(self._rules_store)
@@ -362,7 +310,6 @@ class PathwayClaimPipeline:
         }
 
 
-# Global Pathway pipeline instance
 _pathway_pipeline: Optional[PathwayClaimPipeline] = None
 
 
@@ -384,7 +331,6 @@ def get_pathway_pipeline() -> Optional[PathwayClaimPipeline]:
     
     return _pathway_pipeline
 
-# Convenience top-level helpers so callers don't need to manage the instance
 def pathway_ingest_and_route_claim(claim_data: Dict[str, Any], ml_scores: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     pipeline = get_pathway_pipeline()
     if not pipeline:
