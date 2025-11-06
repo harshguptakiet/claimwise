@@ -70,12 +70,16 @@ Key backend modules
 
 ### Gemini chat assistant
 
-To enable the in-app chatbot (Gemini), set the following environment variables before starting the backend:
+To enable the in-app chatbot (Gemini), set the following environment variables before starting the backend. Do NOT commit real secrets — copy `.env.example` to `.env` and fill values locally:
 
 ```bash
 export GEMINI_API_KEY=<your_google_gemini_api_key>
 # optional (defaults to gemini-1.5-flash)
 export GEMINI_MODEL=gemini-1.5-flash
+
+Security note:
+- `.env` is in `.gitignore`. If a secret was ever committed, rotate it immediately in your provider.
+- Optional: purge history with `git filter-repo` or BFG; otherwise removing the file and force-pushing rewritten history is required to fully remove it from GitHub.
 ```
 
 The Python SDK is included in `backend/requirements.txt` as `google-generativeai`. If you installed dependencies before this feature, reinstall:
