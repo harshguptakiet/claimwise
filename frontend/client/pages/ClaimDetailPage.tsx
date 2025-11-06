@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, FileText, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
@@ -19,6 +19,13 @@ const ClaimDetailPage = () => {
     url: string;
   } | null>(null);
   const [expandedEvidence, setExpandedEvidence] = useState<boolean>(true);
+  const [activeDoc, setActiveDoc] = useState<string | null>(null);
+  const [showAllDocFields, setShowAllDocFields] = useState<boolean>(false);
+
+  const scrollTo = useCallback((sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
 
   useEffect(() => {
     loadClaim();
@@ -126,9 +133,92 @@ const ClaimDetailPage = () => {
           </div>
         </div>
 
-  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Top Insights Strip */}
+        {(() => {
+          const ml = (claim as any).ml_scores || {};
+          const fraudScore = (claim as any).fraud_score ?? ml.fraud_score ?? null;
+          const complexityScore = (claim as any).complexity_score ?? ml.complexity_score ?? null;
+          const severityLevel = (claim as any).severity_level ?? ml.severity_level ?? claim.severity ?? null;
+          const routing = (claim as any).routing || {};
+          const routingTeam = (claim as any).routing_team || (claim as any).final_team || routing.routing_team || claim.queue || null;
+          const adjuster = (claim as any).adjuster || (claim as any).final_adjuster || routing.adjuster || null;
+          const claimType = (claim as any).claim_type || claim.loss_type || null;
+
+          const kpiClass = "bg-[#0b0b0f] border border-[#2a2a32] rounded-xl p-4 hover:border-[#a855f7]/30 transition-all";
+
+          return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+              <div className={kpiClass}>
+                <p className="text-xs text-[#9ca3af] mb-1">Claim ID</p>
+                <p className="text-sm font-mono text-[#f3f4f6] truncate">{(claim as any).claim_number || claim.id}</p>
+              </div>
+              {fraudScore !== null && Number.isFinite(fraudScore) && (
+                <div className={kpiClass}>
+                  <p className="text-xs text-[#9ca3af] mb-1">Fraud</p>
+                  <p className={`text-2xl font-bold ${fraudScore >= 0.6 ? "text-red-400" : fraudScore > 0.3 ? "text-yellow-400" : "text-green-400"}`}>
+                    {(fraudScore * 100).toFixed(1)}%
+                  </p>
+                </div>
+              )}
+              {complexityScore !== null && Number.isFinite(complexityScore) && (
+                <div className={kpiClass}>
+                  <p className="text-xs text-[#9ca3af] mb-1">Complexity</p>
+                  <p className="text-2xl font-bold text-[#a855f7]">{complexityScore.toFixed(1)}</p>
+                </div>
+              )}
+              {severityLevel && (
+                <div className={kpiClass}>
+                  <p className="text-xs text-[#9ca3af] mb-1">Severity</p>
+                  <p className={`text-lg font-semibold ${severityLevel === "High" ? "text-red-400" : severityLevel === "Medium" ? "text-yellow-400" : "text-green-400"}`}>{severityLevel}</p>
+                </div>
+              )}
+              {routingTeam && (
+                <div className={kpiClass}>
+                  <p className="text-xs text-[#9ca3af] mb-1">Routing Team</p>
+                  <p className="text-sm font-medium text-[#f3f4f6] truncate">{routingTeam}</p>
+                </div>
+              )}
+              <div className={kpiClass}>
+                <p className="text-xs text-[#9ca3af] mb-1">Adjuster</p>
+                <p className="text-sm font-medium text-[#f3f4f6] truncate">{adjuster || "—"}</p>
+              </div>
+              {claimType && (
+                <div className={kpiClass + " xl:col-span-2 hidden xl:block"}>
+                  <p className="text-xs text-[#9ca3af] mb-1">Claim Type</p>
+                  <p className="text-sm font-medium text-[#f3f4f6] capitalize">{claimType}</p>
+                </div>
+              )}
+            </div>
+          );
+        })()}
+
+        {/* Sticky Sub-navigation */}
+        <div className="sticky top-0 z-10 -mx-4 px-4 py-3 bg-[#0b0b0f]/80 backdrop-blur border-b border-[#2a2a32] mb-6">
+          <div className="flex flex-wrap gap-2">
+            {[
+              { id: "overview", label: "Overview" },
+              { id: "documents", label: "Documents" },
+              { id: "ai", label: "AI & ML" },
+              { id: "evidence", label: "Evidence" },
+              { id: "routing", label: "Routing" },
+              { id: "chat", label: "Chat" },
+            ].map((s) => (
+              <button
+                key={s.id}
+                onClick={() => scrollTo(s.id)}
+                className="px-3 py-1.5 rounded-md text-sm text-[#9ca3af] hover:text-[#f3f4f6] hover:bg-[#1a1a22] border border-transparent hover:border-[#2a2a32] transition-colors"
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+  <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
           {/* Left Column - Claim Details */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="xl:col-span-8 space-y-6">
+            {/* Overview Anchor */}
+            <div id="overview" className="h-0" />
             {/* Key Details extracted from PDFs (at the top as requested) */}
             {(() => {
               const analyses: Record<string, any> = (claim as any).analyses || {};
@@ -279,92 +369,358 @@ const ClaimDetailPage = () => {
               </div>
             </div>
 
-            {/* Extracted Document Data - Better Format */}
+
+            {/* Documents Hub */}
             {(() => {
-              // Get analyses data from claim
+              const files = (claim as any).files || {};
               const analyses = (claim as any).analyses || {};
-              const extractedDataByDoc: Record<string, Record<string, any>> = {};
-              
-              // Organize extracted data by document type
-              for (const [docType, analysis] of Object.entries(analyses)) {
-                const extraction = (analysis as any)?.extraction || {};
-                if (extraction && Object.keys(extraction).length > 0) {
-                  extractedDataByDoc[docType] = extraction;
-                }
-              }
-              
-              // Also check if description exists but parse it better
-              if (Object.keys(extractedDataByDoc).length === 0 && claim.description) {
-                // Parse description if it exists but analyses are missing
-                // This is a fallback for old claims
-                const descLines = claim.description.split('\n');
-                let currentDoc = '';
-                extractedDataByDoc['parsed'] = {};
-                for (const line of descLines) {
-                  if (line.includes('Document:') && !line.startsWith('Extracted')) {
-                    currentDoc = line.replace('Document:', '').trim().toLowerCase();
-                    if (!extractedDataByDoc[currentDoc]) {
-                      extractedDataByDoc[currentDoc] = {};
-                    }
-                  } else if (line.trim().startsWith('-') && currentDoc) {
-                    const parts = line.trim().substring(1).split(':');
-                    if (parts.length >= 2) {
-                      const key = parts[0].trim().replace(/\s+/g, '_').toLowerCase();
-                      const value = parts.slice(1).join(':').trim();
-                      extractedDataByDoc[currentDoc][key] = value;
-                    }
+              const attachments = Array.isArray(claim.attachments)
+                ? claim.attachments
+                : (claim.attachments && typeof claim.attachments === "object"
+                    ? Object.values(claim.attachments).filter((item: any) => item && typeof item === "object")
+                    : []);
+
+              const allFiles: Array<{ key: string; filename: string; url: string; type?: string; extraction?: any; analysis?: any }>= [];
+
+              if (files && typeof files === "object" && !Array.isArray(files)) {
+                Object.entries(files).forEach(([key, value]) => {
+                  if (value && typeof value === "string") {
+                    const analysis = analyses[key];
+                    allFiles.push({
+                      key,
+                      filename: `${key.toUpperCase()}.pdf`,
+                      url: value,
+                      type: key,
+                      extraction: analysis?.extraction || {},
+                      analysis,
+                    });
                   }
-                }
+                });
               }
-              
-              if (Object.keys(extractedDataByDoc).length > 0) {
+
+              if (Array.isArray(attachments)) {
+                attachments.forEach((att: any, idx: number) => {
+                  if (att && (att.filename || att.url)) {
+                    const name = att.filename || att.url?.split("/").pop() || `document_${idx}.pdf`;
+                    const fileType = att.type ||
+                      (name.toLowerCase().includes("acord") ? "acord" :
+                       name.toLowerCase().includes("loss") ? "loss" :
+                       name.toLowerCase().includes("hospital") ? "hospital" :
+                       name.toLowerCase().includes("fir") ? "fir" :
+                       name.toLowerCase().includes("rc") ? "rc" :
+                       name.toLowerCase().includes("dl") ? "dl" : "other");
+                    const analysis = analyses[fileType];
+                    allFiles.push({
+                      key: `${fileType}_${idx}`,
+                      filename: name,
+                      url: att.url || att,
+                      type: fileType,
+                      extraction: analysis?.extraction || {},
+                      analysis,
+                    });
+                  }
+                });
+              }
+
+              if (allFiles.length === 0) return null;
+              const selected = activeDoc || allFiles[0]?.key;
+              const selectedDoc = allFiles.find((d) => d.key === selected) || allFiles[0];
+              if (!activeDoc && allFiles[0]) setActiveDoc(allFiles[0].key);
+
+              const fields = selectedDoc?.extraction ? Object.entries(selectedDoc.extraction) as Array<[string, any]> : [];
+              const maxFields = showAllDocFields ? fields.length : Math.min(fields.length, 12);
+
+              return (
+                <div id="documents" className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
+                  <h2 className="text-xl font-semibold text-[#f3f4f6] mb-4">Documents & Extracted Data</h2>
+                  {/* Tabs */}
+                  <div className="flex gap-2 overflow-x-auto pb-1 -mb-1">
+                    {allFiles.map((doc) => (
+                      <button
+                        key={doc.key}
+                        onClick={() => { setActiveDoc(doc.key); setShowAllDocFields(false); }}
+                        className={`px-3 py-1.5 rounded-md text-sm whitespace-nowrap border transition-colors ${
+                          (selected === doc.key)
+                            ? "bg-[#a855f7]/20 border-[#a855f7]/40 text-[#f3f4f6]"
+                            : "bg-[#0b0b0f] border-[#2a2a32] text-[#9ca3af] hover:border-[#a855f7]/30"
+                        }`}
+                      >
+                        {doc.type ? doc.type.toUpperCase() : doc.filename}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Selected Doc Panel */}
+                  <div className="mt-4 bg-[#0b0b0f] border border-[#2a2a32] rounded-lg p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-semibold text-[#f3f4f6]">{selectedDoc.filename}</p>
+                        {selectedDoc.type && (
+                          <p className="text-xs text-[#9ca3af] capitalize">{selectedDoc.type} Document</p>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => setSelectedPdf({ filename: selectedDoc.filename, url: selectedDoc.url })}
+                        className="px-3 py-1.5 bg-[#a855f7]/20 hover:bg-[#a855f7]/30 text-[#a855f7] text-xs font-medium rounded-lg transition-all duration-300"
+                      >
+                        View PDF
+                      </button>
+                    </div>
+
+                    {/* Extracted fields */}
+                    {fields.length > 0 ? (
+                      <div className="mt-3">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {fields.slice(0, maxFields).map(([key, value]) => (
+                            <div key={key} className="bg-[#1a1a22] border border-[#2a2a32] rounded p-2">
+                              <p className="text-xs text-[#9ca3af] mb-0.5 truncate">
+                                {key.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
+                              </p>
+                              <p className="text-xs font-medium text-[#f3f4f6] break-words">
+                                {typeof value === 'object' ? JSON.stringify(value) : String(value)}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                        {fields.length > 12 && (
+                          <div className="mt-2 text-right">
+                            <button
+                              onClick={() => setShowAllDocFields((v) => !v)}
+                              className="text-xs text-[#a855f7] hover:text-[#c084fc]"
+                            >
+                              {showAllDocFields ? "Show less" : `Show all ${fields.length} fields`}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-xs text-[#9ca3af] mt-3">No extracted fields available</p>
+                    )}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* AI & ML Insights (moved to main column) */}
+            <div id="ai" className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
+              <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">AI & ML Insights</h3>
+              {(() => {
+                const mlScores = (claim as any).ml_scores || {};
+                const ai = (claim as any).ai_analysis || {};
+                const fraudScore = (claim as any).fraud_score ?? mlScores.fraud_score ?? ai.fraud_score ?? null;
+                const complexityScore = (claim as any).complexity_score ?? mlScores.complexity_score ?? ai.complexity_score ?? null;
+                const severityLevel = (claim as any).severity_level ?? mlScores.severity_level ?? claim.severity ?? null;
+                const litigationScore = mlScores.litigation_score ?? null;
+                const litigationFlag = mlScores.litigation_flag ?? false;
+                const litigationReasons = mlScores.litigation_reasons || [];
+                const subrogationScore = mlScores.subrogation_score ?? null;
+                const subrogationFlag = mlScores.subrogation_flag ?? false;
+                const subrogationReasons = mlScores.subrogation_reasons || [];
+                const fraudLabel = ai.fraud_risk;
+                const complexityLabel = ai.complexity_assessment;
+                const riskFactors = ai.risk_factors || [];
+
+                return (
+                  <div className="space-y-4">
+                    {/* Top KPIs */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {fraudScore !== null && Number.isFinite(fraudScore) && (
+                        <div className="bg-[#0b0b0f] border border-[#2a2a32] rounded p-3">
+                          <p className="text-xs text-[#9ca3af] mb-1">Fraud</p>
+                          <p className={`text-lg font-bold ${fraudScore >= 0.6 ? "text-red-400" : fraudScore > 0.3 ? "text-yellow-400" : "text-green-400"}`}>
+                            {(fraudScore * 100).toFixed(1)}%
+                          </p>
+                          {fraudLabel && <p className="text-[11px] text-[#9ca3af] mt-0.5">{fraudLabel}</p>}
+                        </div>
+                      )}
+                      {complexityScore !== null && Number.isFinite(complexityScore) && (
+                        <div className="bg-[#0b0b0f] border border-[#2a2a32] rounded p-3">
+                          <p className="text-xs text-[#9ca3af] mb-1">Complexity</p>
+                          <p className="text-lg font-bold text-[#a855f7]">{complexityScore.toFixed(1)}</p>
+                          {complexityLabel && <p className="text-[11px] text-[#9ca3af] mt-0.5">{complexityLabel}</p>}
+                        </div>
+                      )}
+                      {severityLevel && (
+                        <div className="bg-[#0b0b0f] border border-[#2a2a32] rounded p-3">
+                          <p className="text-xs text-[#9ca3af] mb-1">Severity</p>
+                          <p className={`text-lg font-bold ${
+                            severityLevel === "High" ? "text-red-400" :
+                            severityLevel === "Medium" ? "text-yellow-400" : "text-green-400"}`}>{severityLevel}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Bars */}
+                    {fraudScore !== null && Number.isFinite(fraudScore) && (
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm text-[#9ca3af]">Fraud Score</span>
+                          <span className={`text-sm font-bold ${fraudScore >= 0.6 ? "text-red-400" : fraudScore > 0.3 ? "text-yellow-400" : "text-green-400"}`}>
+                            {(fraudScore * 100).toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-[#0b0b0f] rounded-full h-2">
+                          <div className={`h-2 rounded-full ${fraudScore >= 0.6 ? "bg-red-500" : fraudScore > 0.3 ? "bg-yellow-500" : "bg-green-500"}`} style={{ width: `${Math.min(fraudScore * 100, 100)}%` }} />
+                        </div>
+                      </div>
+                    )}
+                    {complexityScore !== null && Number.isFinite(complexityScore) && (
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm text-[#9ca3af]">Complexity Score</span>
+                          <span className="text-sm font-bold text-[#a855f7]">{complexityScore.toFixed(1)}</span>
+                        </div>
+                        <div className="w-full bg-[#0b0b0f] rounded-full h-2">
+                          <div className="h-2 rounded-full bg-gradient-to-r from-[#a855f7] to-[#ec4899]" style={{ width: `${Math.min((complexityScore / 5) * 100, 100)}%` }} />
+                        </div>
+                      </div>
+                    )}
+                    {severityLevel && (
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm text-[#9ca3af]">Severity Level</span>
+                          <span className={`text-sm font-bold ${severityLevel === "High" ? "text-red-400" : severityLevel === "Medium" ? "text-yellow-400" : "text-green-400"}`}>{severityLevel}</span>
+                        </div>
+                        <div className="w-full bg-[#0b0b0f] rounded-full h-2">
+                          <div className={`h-2 rounded-full ${severityLevel === "High" ? "bg-red-500" : severityLevel === "Medium" ? "bg-yellow-500" : "bg-green-500"}`} style={{ width: severityLevel === "High" ? "100%" : severityLevel === "Medium" ? "66%" : "33%" }} />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Litigation & Subrogation */}
+                    {(litigationScore !== null || subrogationScore !== null) && (
+                      <div className="grid grid-cols-1 gap-4 pt-2 border-t border-[#2a2a32]">
+                        {litigationScore !== null && Number.isFinite(litigationScore) && (
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm text-[#9ca3af]">Litigation Score</span>
+                                {litigationFlag && <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 text-xs rounded-full font-medium">Flagged</span>}
+                              </div>
+                              <span className={`text-sm font-bold ${litigationScore >= 0.5 ? "text-orange-400" : litigationScore >= 0.3 ? "text-yellow-400" : "text-[#9ca3af]"}`}>
+                                {(litigationScore * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                            <div className="w-full bg-[#0b0b0f] rounded-full h-2 mb-2">
+                              <div className={`h-2 rounded-full ${litigationScore >= 0.5 ? "bg-orange-500" : litigationScore >= 0.3 ? "bg-yellow-500" : "bg-[#4b5563]"}`} style={{ width: `${Math.min(litigationScore * 100, 100)}%` }} />
+                            </div>
+                            {litigationReasons.length > 0 && (
+                              <ul className="space-y-1">
+                                {litigationReasons.map((r: string, i: number) => (
+                                  <li key={i} className="text-xs text-[#f3f4f6] flex items-start gap-2">
+                                    <span className="text-orange-400 mt-0.5">•</span>
+                                    <span>{r}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        )}
+                        {subrogationScore !== null && Number.isFinite(subrogationScore) && (
+                          <div>
+                            <div className="flex justify-between items-center mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm text-[#9ca3af]">Subrogation Score</span>
+                                {subrogationFlag && <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full font-medium">Flagged</span>}
+                              </div>
+                              <span className={`text-sm font-bold ${subrogationScore >= 0.5 ? "text-blue-400" : subrogationScore >= 0.3 ? "text-cyan-400" : "text-[#9ca3af]"}`}>
+                                {(subrogationScore * 100).toFixed(1)}%
+                              </span>
+                            </div>
+                            <div className="w-full bg-[#0b0b0f] rounded-full h-2 mb-2">
+                              <div className={`h-2 rounded-full ${subrogationScore >= 0.5 ? "bg-blue-500" : subrogationScore >= 0.3 ? "bg-cyan-500" : "bg-[#4b5563]"}`} style={{ width: `${Math.min(subrogationScore * 100, 100)}%` }} />
+                            </div>
+                            {subrogationReasons.length > 0 && (
+                              <ul className="space-y-1">
+                                {subrogationReasons.map((r: string, i: number) => (
+                                  <li key={i} className="text-xs text-[#f3f4f6] flex items-start gap-2">
+                                    <span className="text-blue-400 mt-0.5">•</span>
+                                    <span>{r}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* AI Rationale & Risk Factors */}
+                    {(claim as any).rationale || (riskFactors.length > 0) ? (
+                      <div className="pt-3 border-t border-[#2a2a32]">
+                        {(claim as any).rationale && (
+                          <div className="mb-3">
+                            <p className="text-xs text-[#9ca3af] mb-1">AI Rationale</p>
+                            <div className="text-sm text-[#9ca3af] whitespace-pre-line">
+                              {(claim as any).rationale}
+                            </div>
+                          </div>
+                        )}
+                        {riskFactors.length > 0 && (
+                          <div>
+                            <p className="text-xs text-[#9ca3af] mb-1">Risk Factors</p>
+                            <ul className="list-disc list-inside space-y-1">
+                              {riskFactors.map((factor: string, idx: number) => (
+                                <li key={idx} className="text-sm text-[#f3f4f6]">{factor}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* Routing Information (moved to main column) */}
+            <div id="routing" className="h-0" />
+            {(() => {
+              const routing = (claim as any).routing || {};
+              const routingTeam = (claim as any).routing_team || (claim as any).final_team || claim.queue || "";
+              const adjuster = (claim as any).adjuster || (claim as any).final_adjuster || routing.adjuster || "";
+              const routingReasons = routing.routing_reasons || routing.routing_reason || [];
+              const reasons = Array.isArray(routingReasons) ? routingReasons : [routingReasons].filter(Boolean);
+
+              if (routingTeam || adjuster || reasons.length > 0) {
                 return (
                   <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-                    <h2 className="text-xl font-semibold text-[#f3f4f6] mb-4 flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-[#a855f7]" />
-                      Extracted Document Data
-                    </h2>
-                    <div className="space-y-4">
-                      {Object.entries(extractedDataByDoc).map(([docType, data]) => (
-                        <div
-                          key={docType}
-                          className="bg-[#0b0b0f] border border-[#2a2a32] rounded-lg p-4"
-                        >
-                          <h3 className="text-sm font-semibold text-[#a855f7] mb-3 uppercase tracking-wide">
-                            {docType === 'parsed' ? 'Extracted Data' : `${docType.toUpperCase()} Document`}
-                          </h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {Object.entries(data).map(([key, value]) => {
-                              if (!value || value === null || value === '') return null;
-                              
-                              // Format field name nicely
-                              const fieldName = key
-                                .replace(/_/g, ' ')
-                                .replace(/\b\w/g, (l) => l.toUpperCase());
-                              
-                              // Format value based on type
-                              let displayValue = String(value);
-                              if (typeof value === 'object') {
-                                displayValue = JSON.stringify(value);
-                              }
-                              
-                              return (
-                                <div
-                                  key={key}
-                                  className="bg-[#1a1a22] border border-[#2a2a32] rounded p-3 hover:border-[#a855f7]/30 transition-colors"
-                                >
-                                  <p className="text-xs font-medium text-[#9ca3af] mb-1 uppercase tracking-wide">
-                                    {fieldName}
-                                  </p>
-                                  <p className="text-sm font-medium text-[#f3f4f6] break-words">
-                                    {displayValue}
-                                  </p>
-                                </div>
-                              );
-                            })}
-                          </div>
+                    <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">
+                      Routing Information
+                    </h3>
+                    <div className="space-y-3">
+                      {routingTeam && (
+                        <div>
+                          <p className="text-xs text-[#9ca3af] mb-1">Assigned Team</p>
+                          <p className="text-sm font-medium text-[#f3f4f6]">{routingTeam}</p>
+                          <p className="text-xs text-[#6b7280] mt-1">
+                            {routingTeam.includes("Health Dept") && routingTeam.includes("High") ? "Health Department - High Complexity Team" :
+                             routingTeam.includes("Health Dept") && routingTeam.includes("Mid") ? "Health Department - Medium Complexity Team" :
+                             routingTeam.includes("Health Dept") ? "Health Department - Standard Processing Team" :
+                             routingTeam.includes("Accident Dept") && routingTeam.includes("High") ? "Accident Department - High Complexity Team" :
+                             routingTeam.includes("Accident Dept") && routingTeam.includes("Mid") ? "Accident Department - Medium Complexity Team" :
+                             routingTeam.includes("Accident Dept") ? "Accident Department - Standard Processing Team" :
+                             routingTeam.includes("SIU") || routingTeam.includes("Fraud") ? "Special Investigation Unit" :
+                             ""}
+                          </p>
                         </div>
-                      ))}
+                      )}
+                      {adjuster && (
+                        <div>
+                          <p className="text-xs text-[#9ca3af] mb-1">Assigned Adjuster</p>
+                          <p className="text-sm font-medium text-[#f3f4f6]">{adjuster}</p>
+                        </div>
+                      )}
+                      {reasons.length > 0 && (
+                        <div>
+                          <p className="text-xs text-[#9ca3af] mb-2">Transfer Reason</p>
+                          <ul className="list-disc list-inside space-y-1">
+                            {reasons.map((reason: string, idx: number) => (
+                              <li key={idx} className="text-sm text-[#a855f7]">{reason}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </div>
                 );
@@ -372,68 +728,30 @@ const ClaimDetailPage = () => {
               return null;
             })()}
 
-            {/* AI Analysis */}
-            {(claim as any).ai_analysis && (
+            {/* Confidence Score (moved to main column) */}
+            {claim.confidence && (
               <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-                <h2 className="text-xl font-semibold text-[#f3f4f6] mb-4">AI Analysis</h2>
-                {(() => {
-                  const ml = (claim as any).ml_scores || {};
-                  const ai = (claim as any).ai_analysis || {};
-                  const fraudScore = (claim as any).fraud_score ?? ml.fraud_score ?? ai.fraud_score ?? null;
-                  const complexityScore = (claim as any).complexity_score ?? ml.complexity_score ?? ai.complexity_score ?? null;
-                  const fraudLabel = ai.fraud_risk;
-                  const complexityLabel = ai.complexity_assessment;
-                  return (
-                    <div className="space-y-3">
-                      <div className="grid grid-cols-2 gap-4">
-                        {fraudScore !== null && Number.isFinite(fraudScore) && (
-                          <div>
-                            <p className="text-xs text-[#9ca3af] mb-1">Fraud Score</p>
-                            <p className={`text-sm font-medium ${
-                              fraudScore >= 0.6 ? "text-red-400" : fraudScore > 0.3 ? "text-yellow-400" : "text-green-400"
-                            }`}>
-                              {(fraudScore * 100).toFixed(1)}%
-                              {fraudLabel ? <span className="text-[#9ca3af] ml-2">({fraudLabel})</span> : null}
-                            </p>
-                          </div>
-                        )}
-                        {complexityScore !== null && Number.isFinite(complexityScore) && (
-                          <div>
-                            <p className="text-xs text-[#9ca3af] mb-1">Complexity Score</p>
-                            <p className="text-sm font-medium text-[#a855f7]">
-                              {complexityScore.toFixed(1)}
-                              {complexityLabel ? <span className="text-[#9ca3af] ml-2">({complexityLabel})</span> : null}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                      {ai.risk_factors && ai.risk_factors.length > 0 && (
-                        <div className="pt-3 border-t border-[#2a2a32]">
-                          <p className="text-xs text-[#9ca3af] mb-2">Risk Factors</p>
-                          <ul className="list-disc list-inside space-y-1">
-                            {ai.risk_factors.map((factor: string, idx: number) => (
-                              <li key={idx} className="text-sm text-[#f3f4f6]">{factor}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
+                <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">Confidence Score</h3>
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-[#9ca3af]">AI Confidence</span>
+                      <span className="text-2xl font-bold text-[#a855f7]">{(claim.confidence * 100).toFixed(0)}%</span>
                     </div>
-                  );
-                })()}
+                    <div className="w-full bg-[#0b0b0f] rounded-full h-3">
+                      <div
+                        className="bg-gradient-to-r from-[#a855f7] to-[#ec4899] h-3 rounded-full transition-all shadow-lg shadow-[#a855f7]/30"
+                        style={{ width: `${claim.confidence * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-xs text-[#9ca3af]">Based on AI analysis of uploaded documents and form data</p>
+                </div>
               </div>
             )}
 
-            {/* AI Rationale */}
-            {claim.rationale && (
-            <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-              <h2 className="text-xl font-semibold text-[#f3f4f6] mb-4">
-                AI Analysis & Rationale
-              </h2>
-                <div className="text-sm text-[#9ca3af] whitespace-pre-line">
-                {claim.rationale}
-                </div>
-            </div>
-            )}
+            {/* Evidence Anchor */}
+            <div id="evidence" className="h-0" />
 
             {/* Evidence & Sources Section */}
             <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
@@ -556,9 +874,10 @@ const ClaimDetailPage = () => {
             </div>
           </div>
 
-          {/* Right Column - Claim Assistant + Details, ML Scores, Routing, & Documents */}
-          <div className="space-y-6">
+          {/* Right Column - Chat + Claim Info */}
+          <div className="xl:col-span-4 space-y-6 sticky top-24 self-start">
             {/* Claim AI Assistant (Gemini) */}
+            <div id="chat" />
             <ClaimChat
               claimId={claim.id}
               claimSummary={{
@@ -601,460 +920,7 @@ const ClaimDetailPage = () => {
                 )}
               </div>
             </div>
-
-            {/* ML Model Scores */}
-            <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-              <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">
-                ML Model Scores
-              </h3>
-              <div className="space-y-4">
-                {/* Fraud Score */}
-                {(() => {
-                  const mlScores = (claim as any).ml_scores || {};
-                  const fraudScore = (claim as any).fraud_score ?? mlScores.fraud_score ?? null;
-                  const show = fraudScore !== null && Number.isFinite(fraudScore);
-                  return show && (
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-[#9ca3af]">Fraud Score</span>
-                        <span className={`text-lg font-bold ${
-                          fraudScore >= 0.6 ? "text-red-400" :
-                          fraudScore > 0.3 ? "text-yellow-400" :
-                          "text-green-400"
-                        }`}>
-                          {(fraudScore * 100).toFixed(1)}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-[#0b0b0f] rounded-full h-2">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
-                            fraudScore >= 0.6 ? "bg-red-500" :
-                            fraudScore > 0.3 ? "bg-yellow-500" :
-                            "bg-green-500"
-                          }`}
-                          style={{ width: `${Math.min(fraudScore * 100, 100)}%` }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })()}
-
-                {/* Complexity Score */}
-                {(() => {
-                  const mlScores = (claim as any).ml_scores || {};
-                  const complexityScore = (claim as any).complexity_score ?? mlScores.complexity_score ?? null;
-                  const show = complexityScore !== null && Number.isFinite(complexityScore);
-                  return show && (
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-[#9ca3af]">Complexity Score</span>
-                        <span className="text-lg font-bold text-[#a855f7]">
-                          {complexityScore.toFixed(1)}
-                        </span>
-                      </div>
-                      <div className="w-full bg-[#0b0b0f] rounded-full h-2">
-                        <div
-                          className="h-2 rounded-full transition-all bg-gradient-to-r from-[#a855f7] to-[#ec4899]"
-                          style={{ width: `${Math.min((complexityScore / 5) * 100, 100)}%` }}
-                        />
-                      </div>
-                      <p className="text-xs text-[#9ca3af] mt-1">
-                        {complexityScore >= 3.5 ? "High Complexity" :
-                         complexityScore >= 2 ? "Medium Complexity" :
-                         "Low Complexity"}
-                      </p>
-                    </div>
-                  );
-                })()}
-
-                {/* Severity Level */}
-                {(() => {
-                  const mlScores = (claim as any).ml_scores || {};
-                  const severityLevel = (claim as any).severity_level ?? mlScores.severity_level ?? claim.severity ?? null;
-                  return severityLevel && (
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-[#9ca3af]">Severity Level</span>
-                        <span className={`text-lg font-bold ${
-                          severityLevel === "High" ? "text-red-400" :
-                          severityLevel === "Medium" ? "text-yellow-400" :
-                          "text-green-400"
-                        }`}>
-                          {severityLevel}
-                        </span>
-                      </div>
-                      <div className="w-full bg-[#0b0b0f] rounded-full h-2">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
-                            severityLevel === "High" ? "bg-red-500" :
-                            severityLevel === "Medium" ? "bg-yellow-500" :
-                            "bg-green-500"
-                          }`}
-                          style={{
-                            width: severityLevel === "High" ? "100%" :
-                                   severityLevel === "Medium" ? "66%" : "33%"
-                          }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })()}
-
-                {/* Litigation Score */}
-                {(() => {
-                  const mlScores = (claim as any).ml_scores || {};
-                  const litigationScore = mlScores.litigation_score ?? null;
-                  const litigationFlag = mlScores.litigation_flag ?? false;
-                  const litigationReasons = mlScores.litigation_reasons || [];
-                  const show = litigationScore !== null && Number.isFinite(litigationScore);
-                  return show && (
-                    <div className="pt-4 border-t border-[#2a2a32]">
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm text-[#9ca3af]">Litigation Score</span>
-                          {litigationFlag && (
-                            <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 text-xs rounded-full font-medium">
-                              Flagged
-                            </span>
-                          )}
-                        </div>
-                        <span className={`text-lg font-bold ${
-                          litigationScore >= 0.5 ? "text-orange-400" :
-                          litigationScore >= 0.3 ? "text-yellow-400" :
-                          "text-[#9ca3af]"
-                        }`}>
-                          {(litigationScore * 100).toFixed(1)}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-[#0b0b0f] rounded-full h-2 mb-3">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
-                            litigationScore >= 0.5 ? "bg-orange-500" :
-                            litigationScore >= 0.3 ? "bg-yellow-500" :
-                            "bg-[#4b5563]"
-                          }`}
-                          style={{ width: `${Math.min(litigationScore * 100, 100)}%` }}
-                        />
-                      </div>
-                      {litigationReasons.length > 0 && (
-                        <div className="mt-2">
-                          <p className="text-xs text-[#9ca3af] mb-1.5 font-medium">Reasons:</p>
-                          <ul className="space-y-1">
-                            {litigationReasons.map((reason: string, idx: number) => (
-                              <li key={idx} className="text-xs text-[#f3f4f6] flex items-start gap-2">
-                                <span className="text-orange-400 mt-0.5">•</span>
-                                <span>{reason}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })()}
-
-                {/* Subrogation Score */}
-                {(() => {
-                  const mlScores = (claim as any).ml_scores || {};
-                  const subrogationScore = mlScores.subrogation_score ?? null;
-                  const subrogationFlag = mlScores.subrogation_flag ?? false;
-                  const subrogationReasons = mlScores.subrogation_reasons || [];
-                  const show = subrogationScore !== null && Number.isFinite(subrogationScore);
-                  return show && (
-                    <div className="pt-4 border-t border-[#2a2a32]">
-                      <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm text-[#9ca3af]">Subrogation Score</span>
-                          {subrogationFlag && (
-                            <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full font-medium">
-                              Flagged
-                            </span>
-                          )}
-                        </div>
-                        <span className={`text-lg font-bold ${
-                          subrogationScore >= 0.5 ? "text-blue-400" :
-                          subrogationScore >= 0.3 ? "text-cyan-400" :
-                          "text-[#9ca3af]"
-                        }`}>
-                          {(subrogationScore * 100).toFixed(1)}%
-                        </span>
-                      </div>
-                      <div className="w-full bg-[#0b0b0f] rounded-full h-2 mb-3">
-                        <div
-                          className={`h-2 rounded-full transition-all ${
-                            subrogationScore >= 0.5 ? "bg-blue-500" :
-                            subrogationScore >= 0.3 ? "bg-cyan-500" :
-                            "bg-[#4b5563]"
-                          }`}
-                          style={{ width: `${Math.min(subrogationScore * 100, 100)}%` }}
-                        />
-                      </div>
-                      {subrogationReasons.length > 0 && (
-                        <div className="mt-2">
-                          <p className="text-xs text-[#9ca3af] mb-1.5 font-medium">Reasons:</p>
-                          <ul className="space-y-1">
-                            {subrogationReasons.map((reason: string, idx: number) => (
-                              <li key={idx} className="text-xs text-[#f3f4f6] flex items-start gap-2">
-                                <span className="text-blue-400 mt-0.5">•</span>
-                                <span>{reason}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })()}
-              </div>
-            </div>
-
-            {/* Routing Information */}
-            {(() => {
-              const routing = (claim as any).routing || {};
-              const routingTeam = (claim as any).routing_team || (claim as any).final_team || claim.queue || "";
-              const adjuster = (claim as any).adjuster || (claim as any).final_adjuster || routing.adjuster || "";
-              const routingReasons = routing.routing_reasons || routing.routing_reason || [];
-              const reasons = Array.isArray(routingReasons) ? routingReasons : [routingReasons].filter(Boolean);
-
-              if (routingTeam || adjuster || reasons.length > 0) {
-                return (
-                  <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-                    <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">
-                      Routing Information
-                    </h3>
-                    <div className="space-y-3">
-                      {routingTeam && (
-                        <div>
-                          <p className="text-xs text-[#9ca3af] mb-1">Assigned Team</p>
-                          <p className="text-sm font-medium text-[#f3f4f6]">{routingTeam}</p>
-                          <p className="text-xs text-[#6b7280] mt-1">
-                            {routingTeam.includes("Health Dept") && routingTeam.includes("High") ? "Health Department - High Complexity Team" :
-                             routingTeam.includes("Health Dept") && routingTeam.includes("Mid") ? "Health Department - Medium Complexity Team" :
-                             routingTeam.includes("Health Dept") ? "Health Department - Standard Processing Team" :
-                             routingTeam.includes("Accident Dept") && routingTeam.includes("High") ? "Accident Department - High Complexity Team" :
-                             routingTeam.includes("Accident Dept") && routingTeam.includes("Mid") ? "Accident Department - Medium Complexity Team" :
-                             routingTeam.includes("Accident Dept") ? "Accident Department - Standard Processing Team" :
-                             routingTeam.includes("SIU") || routingTeam.includes("Fraud") ? "Special Investigation Unit" :
-                             ""}
-                          </p>
-                        </div>
-                      )}
-                      {adjuster && (
-                        <div>
-                          <p className="text-xs text-[#9ca3af] mb-1">Assigned Adjuster</p>
-                          <p className="text-sm font-medium text-[#f3f4f6]">{adjuster}</p>
-                        </div>
-                      )}
-                      {reasons.length > 0 && (
-                        <div>
-                          <p className="text-xs text-[#9ca3af] mb-2">Transfer Reason</p>
-                          <ul className="list-disc list-inside space-y-1">
-                            {reasons.map((reason: string, idx: number) => (
-                              <li key={idx} className="text-sm text-[#a855f7]">{reason}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              }
-              return null;
-            })()}
-
-            {/* Proof / Documents with PDF Data */}
-            <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-              <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#a855f7]" />
-                Proof / Documents
-              </h3>
-              <div className="space-y-4">
-                {(() => {
-                  const files = (claim as any).files || {};
-                  const analyses = (claim as any).analyses || {};
-                  // Ensure attachments is always an array
-                  const attachments = Array.isArray(claim.attachments) 
-                    ? claim.attachments 
-                    : (claim.attachments && typeof claim.attachments === 'object' 
-                        ? Object.values(claim.attachments).filter((item: any) => item && typeof item === 'object')
-                        : []);
-                  
-                  // Combine files from both sources
-                  const allFiles: Array<{ 
-                    filename: string; 
-                    url: string; 
-                    type?: string;
-                    analysis?: any;
-                    extraction?: any;
-                  }> = [];
-                  
-                  // Add files from claim.files object with analyses
-                  if (files && typeof files === 'object' && !Array.isArray(files)) {
-                    Object.entries(files).forEach(([key, value]) => {
-                      if (value && typeof value === "string") {
-                        const analysis = analyses[key];
-                        allFiles.push({
-                          filename: `${key.toUpperCase()}.pdf`,
-                          url: value,
-                          type: key,
-                          analysis: analysis,
-                          extraction: analysis?.extraction || {}
-                        });
-                      }
-                    });
-                  }
-                  
-                  // Add attachments (ensure it's an array before forEach)
-                  if (Array.isArray(attachments)) {
-                    attachments.forEach((att: any) => {
-                      if (att && (att.filename || att.url)) {
-                        const fileType = att.type || 
-                          ((att.filename || att.url || '').toLowerCase().includes("acord") ? "acord" :
-                          (att.filename || att.url || '').toLowerCase().includes("loss") ? "loss" :
-                          (att.filename || att.url || '').toLowerCase().includes("hospital") ? "hospital" :
-                          (att.filename || att.url || '').toLowerCase().includes("fir") ? "fir" :
-                          (att.filename || att.url || '').toLowerCase().includes("rc") ? "rc" :
-                          (att.filename || att.url || '').toLowerCase().includes("dl") ? "dl" :
-                          "other");
-                        
-                        const analysis = analyses[fileType];
-                        allFiles.push({
-                          filename: att.filename || att.url?.split('/').pop() || 'document.pdf',
-                          url: att.url || att,
-                          type: fileType,
-                          analysis: analysis,
-                          extraction: analysis?.extraction || {}
-                        });
-                      }
-                    });
-                  }
-
-                  if (allFiles.length > 0) {
-                    return allFiles.map((file, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-[#0b0b0f] border border-[#2a2a32] rounded-lg p-4 hover:border-[#a855f7]/50 transition-all duration-300"
-                      >
-                        {/* Document Header */}
-                        <div className="flex items-center justify-between mb-3">
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <FileText className="w-6 h-6 text-[#a855f7] flex-shrink-0" />
-                            <div className="min-w-0 flex-1">
-                              <p className="text-sm font-semibold text-[#f3f4f6] truncate">
-                                {file.filename}
-                              </p>
-                              {file.type && (
-                                <p className="text-xs text-[#9ca3af] capitalize mt-0.5">
-                                  {file.type} Document
-                                  {file.analysis?.document_type && ` • ${file.analysis.document_type}`}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <button
-                            onClick={() =>
-                              setSelectedPdf({
-                                filename: file.filename,
-                                url: file.url,
-                              })
-                            }
-                            className="px-3 py-1.5 bg-[#a855f7]/20 hover:bg-[#a855f7]/30 text-[#a855f7] text-xs font-medium rounded-lg transition-all duration-300 flex-shrink-0"
-                          >
-                            View PDF
-                          </button>
-                        </div>
-
-                        {/* Extracted Data from PDF */}
-                        {file.extraction && Object.keys(file.extraction).length > 0 && (
-                          <div className="mt-3 pt-3 border-t border-[#2a2a32]">
-                            <p className="text-xs font-semibold text-[#9ca3af] mb-2 uppercase tracking-wide">
-                              Extracted Data
-                            </p>
-                            <div className="grid grid-cols-2 gap-2">
-                              {Object.entries(file.extraction).slice(0, 8).map(([key, value]: [string, any]) => {
-                                if (!value || value === null || value === '') return null;
-                                return (
-                                  <div key={key} className="bg-[#1a1a22] border border-[#2a2a32] rounded p-2">
-                                    <p className="text-xs text-[#9ca3af] mb-0.5 truncate">
-                                      {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                                    </p>
-                                    <p className="text-xs font-medium text-[#f3f4f6] truncate">
-                                      {String(value)}
-                                    </p>
-                                  </div>
-                                );
-                              })}
-                              {Object.keys(file.extraction).length > 8 && (
-                                <div className="col-span-2 text-xs text-[#9ca3af] pt-1">
-                                  +{Object.keys(file.extraction).length - 8} more fields
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Analysis Status */}
-                        {file.analysis && (
-                          <div className="mt-3 pt-3 border-t border-[#2a2a32] flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <span className={`w-2 h-2 rounded-full ${
-                                file.analysis.validation?.status === 'valid' ? 'bg-green-400' :
-                                file.analysis.validation?.status === 'invalid' ? 'bg-red-400' :
-                                'bg-yellow-400'
-                              }`}></span>
-                              <span className="text-xs text-[#9ca3af]">
-                                {file.analysis.validation?.status === 'valid' ? 'Validated' :
-                                 file.analysis.validation?.status === 'invalid' ? 'Validation Failed' :
-                                 file.analysis.validation?.status === 'skipped' ? 'Validation Skipped' :
-                                 'Pending Validation'}
-                              </span>
-                            </div>
-                            {file.analysis.text_summary?.chars && (
-                              <span className="text-xs text-[#6b7280]">
-                                {file.analysis.text_summary.chars} chars extracted
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    ));
-                  }
-                  return (
-                    <p className="text-[#9ca3af] text-sm text-center py-4">
-                      No documents available
-                    </p>
-                  );
-                })()}
-              </div>
-            </div>
-
-            {/* Confidence Score (Legacy - keeping for compatibility) */}
-            {claim.confidence && (
-            <div className="bg-[#1a1a22] border border-[#2a2a32] rounded-lg p-6 hover:border-[#a855f7]/30 transition-all duration-300">
-              <h3 className="text-lg font-semibold text-[#f3f4f6] mb-4">
-                Confidence Score
-              </h3>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-[#9ca3af]">AI Confidence</span>
-                    <span className="text-2xl font-bold text-[#a855f7]">
-                      {(claim.confidence * 100).toFixed(0)}%
-                    </span>
-                  </div>
-                  <div className="w-full bg-[#0b0b0f] rounded-full h-3">
-                    <div
-                      className="bg-gradient-to-r from-[#a855f7] to-[#ec4899] h-3 rounded-full transition-all shadow-lg shadow-[#a855f7]/30"
-                      style={{ width: `${claim.confidence * 100}%` }}
-                      />
-                  </div>
-                </div>
-                <p className="text-xs text-[#9ca3af]">
-                  Based on AI analysis of uploaded documents and form data
-                </p>
-              </div>
-            </div>
-            )}
+            
           </div>
         </div>
       </div>

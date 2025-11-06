@@ -79,7 +79,16 @@
       "rule_applied": true
     },
     "fraud_score": 0.137,
-    "complexity_score": 4.0
+    "complexity_score": 4.0,
+    "history": [
+      {
+        "type": "reassign",
+        "queue": "Health Dept - High",
+        "assignee": "Senior Adjuster",
+        "note": "",
+        "at": "2025-11-06T17:33:35.009475Z"
+      }
+    ]
   },
   {
     "id": "CLM-1762448750671",
