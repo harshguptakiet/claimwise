@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Dev: Start ClaimWise",
+      "type": "shell",
+      "command": "./run.sh",
+      "args": [
+        "up"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Stop ClaimWise",
+      "type": "shell",
+      "command": "./run.sh",
+      "args": [
+        "down"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Restart ClaimWise",
+      "type": "shell",
+      "command": "./run.sh",
+      "args": [
+        "restart"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Show Logs",
+      "type": "shell",
+      "command": "./run.sh",
+      "args": [
+        "logs"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "problemMatcher": []
+    }
+  ]
+}
