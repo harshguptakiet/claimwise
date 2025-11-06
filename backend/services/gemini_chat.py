@@ -72,10 +72,35 @@ async def chat_with_gemini(
     try:
         # Lazy import to avoid import errors if not installed
         import google.generativeai as genai  # type: ignore
-
         genai.configure(api_key=api_key)
-        model_name = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
-        client = genai.GenerativeModel(model_name)
+        # Prefer explicit override if provided
+        override = os.getenv("GEMINI_MODEL", "").strip()
+        candidates: List[str] = []
+        if override:
+            candidates.append(override)
+        try:
+            # Discover available models and capabilities dynamically (API may be v1 or v1beta)
+            models = genai.list_models()  # returns iterable of model objects
+            # Filter models that support generateContent
+            for m in models:
+                caps = getattr(m, "supported_generation_methods", None) or []
+                name = getattr(m, "name", "")
+                # names are like "models/gemini-2.0-flash"; we want the tail id
+                tail = name.split("/")[-1] if name else ""
+                if "generateContent" in caps and tail:
+                    candidates.append(tail)
+        except Exception as e:
+            logger.warning("Failed to list models; falling back to known IDs: %s", e)
+            candidates.extend([
+                "gemini-2.0-flash",
+                "gemini-2.0-flash-lite",
+                "gemini-2.0-pro",
+                "gemini-1.5-flash",
+                "gemini-1.5-pro",
+            ])
+        # Deduplicate while preserving order
+        seen = set()
+        candidates = [x for x in candidates if not (x in seen or seen.add(x))]
 
         # Construct messages: a system-style preamble + claim context + history + user message
         ctx_block = _render_context(claim_context)
@@ -92,8 +117,22 @@ async def chat_with_gemini(
             hist_text += f"{role.title()}: {content}\n"
 
         prompt = preface + hist_text + f"User: {message}\nAssistant:"
-        resp = await asyncio.to_thread(client.generate_content, prompt)
-        return (getattr(resp, "text", None) or "").strip() or "(No response)"
+
+        last_err: Optional[Exception] = None
+        for name in candidates:
+            try:
+                client = genai.GenerativeModel(name)
+                resp = await asyncio.to_thread(client.generate_content, prompt)
+                text = (getattr(resp, "text", None) or "").strip()
+                if text:
+                    return text
+            except Exception as e:
+                last_err = e
+                logger.warning("Gemini model '%s' failed: %s", name, e)
+                continue
+        if last_err:
+            raise last_err
+        return "(No response)"
     except Exception as e:
         logger.exception("Gemini chat failed: %s", e)
         return (

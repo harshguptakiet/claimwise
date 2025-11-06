@@ -26,6 +26,24 @@ FRONTEND_LOG="$LOG_DIR/frontend.log"
 BACKEND_PID_FILE="$PID_DIR/backend.pid"
 FRONTEND_PID_FILE="$PID_DIR/frontend.pid"
 
+# Load environment variables (for secrets like GEMINI_API_KEY)
+load_env() {
+  # Export variables from repo-level .env if present
+  if [[ -f "$REPO_ROOT/.env" ]]; then
+    set -a
+    # shellcheck disable=SC1090
+    source "$REPO_ROOT/.env"
+    set +a
+  fi
+  # Also allow backend/.env overrides
+  if [[ -f "$BACKEND_DIR/.env" ]]; then
+    set -a
+    # shellcheck disable=SC1090
+    source "$BACKEND_DIR/.env"
+    set +a
+  fi
+}
+
 ensure_frontend_env() {
   # Create a default .env pointing to local backend if none exists
   if [[ ! -f "$FRONTEND_DIR/.env" ]]; then
@@ -57,6 +75,8 @@ start_backend() {
   (
     cd "$BACKEND_DIR"
     export PYTHONPATH="$BACKEND_DIR:${PYTHONPATH:-}"
+    # Load env before starting (e.g., GEMINI_API_KEY)
+    load_env
 
     # Prefer project venv if present
     if [[ -x "$REPO_ROOT/.venv/bin/python" ]]; then
