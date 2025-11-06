@@ -1,5 +1,150 @@
 [
   {
+    "id": "CLM-1762439198561",
+    "claim_number": "CLM-1762439198561",
+    "claimant": "Mayank",
+    "policy_no": "CLM-1762439198561",
+    "loss_type": "medical",
+    "claim_type": "medical",
+    "created_at": "2025-11-06T14:26:38.813243Z",
+    "severity": "High",
+    "severity_level": "High",
+    "confidence": 0.040000000000000036,
+    "queue": "Fast Track",
+    "routing_team": "Fast Track",
+    "final_team": "Fast Track",
+    "status": "Processing",
+    "email": "mayank@gmail.com",
+    "description": "",
+    "rationale": "",
+    "evidence": [],
+    "ai_analysis": {},
+    "sources": [],
+    "attachments": [
+      {
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762439198561_acord.pdf",
+        "type": "acord"
+      },
+      {
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762439198561_loss.pdf",
+        "type": "loss"
+      },
+      {
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762439198561_hospital.pdf",
+        "type": "hospital"
+      }
+    ],
+    "assignee": "Standard Adjuster",
+    "adjuster": "Standard Adjuster",
+    "ml_scores": {
+      "fraud_score": 0.96,
+      "complexity_score": 4.0,
+      "severity_level": "High",
+      "fraud_label": 1,
+      "claim_category": "health",
+      "litigation_score": 0.5,
+      "litigation_flag": true,
+      "litigation_reasons": [
+        "Injuries reported",
+        "High severity/complexity"
+      ],
+      "subrogation_score": 0.0,
+      "subrogation_flag": false,
+      "subrogation_reasons": []
+    },
+    "routing": {
+      "routing_team": "Fast Track",
+      "adjuster": "Standard Adjuster",
+      "routing_reasons": [
+        "Default routing due to error"
+      ],
+      "error": "'float' object has no attribute 'toFixed'"
+    },
+    "fraud_score": 0.96,
+    "complexity_score": 4.0
+  },
+  {
+    "id": "CLM-1762439005422",
+    "claim_number": "CLM-1762439005422",
+    "claimant": "HARSHIT",
+    "policy_no": "CLM-1762439005422",
+    "loss_type": "medical",
+    "claim_type": "medical",
+    "created_at": "2025-11-06T14:23:26.685768Z",
+    "severity": "Medium",
+    "severity_level": "Medium",
+    "confidence": 1.0,
+    "queue": "Accident Dept - High",
+    "routing_team": "Accident Dept - High",
+    "final_team": "Accident Dept - High",
+    "status": "Processing",
+    "email": "guptasecularharsh@gmail.com",
+    "description": "",
+    "rationale": "",
+    "evidence": [],
+    "ai_analysis": {},
+    "sources": [],
+    "attachments": [
+      {
+        "filename": "ACORD.pdf",
+        "url": "/files/CLM-1762439005422_acord.pdf",
+        "type": "acord"
+      },
+      {
+        "filename": "LOSS.pdf",
+        "url": "/files/CLM-1762439005422_loss.pdf",
+        "type": "loss"
+      },
+      {
+        "filename": "HOSPITAL.pdf",
+        "url": "/files/CLM-1762439005422_hospital.pdf",
+        "type": "hospital"
+      }
+    ],
+    "assignee": "Senior Adjuster",
+    "adjuster": "Senior Adjuster",
+    "ml_scores": {
+      "fraud_score": 0.0,
+      "complexity_score": 2.0,
+      "severity_level": "Medium",
+      "fraud_label": 0,
+      "claim_category": "health",
+      "litigation_score": 0.25,
+      "litigation_flag": false,
+      "litigation_reasons": [
+        "Injuries reported"
+      ],
+      "subrogation_score": 0.25,
+      "subrogation_flag": false,
+      "subrogation_reasons": [
+        "Significant damage, consistent"
+      ]
+    },
+    "routing": {
+      "routing_team": "Health Dept - Mid",
+      "adjuster": "Standard Adjuster",
+      "routing_reasons": [
+        "Complexity score is 2.0 and Severity score is Medium so routed to this team"
+      ],
+      "routing_reason": "Complexity score is 2.0 and Severity score is Medium so routed to this team",
+      "rule_applied": true
+    },
+    "fraud_score": 0.0,
+    "complexity_score": 2.0,
+    "history": [
+      {
+        "type": "reassign",
+        "queue": "Accident Dept - High",
+        "assignee": "Senior Adjuster",
+        "note": "",
+        "at": "2025-11-06T14:24:24.954064Z"
+      }
+    ]
+  },
+  {
     "id": "CLM-1762070246796",
     "claim_number": "CLM-1762070246796",
     "claimant": "kanak",
